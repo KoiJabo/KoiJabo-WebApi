@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "koi jabo", "koi jabo\koi jabo.csproj", "{54C897B0-50E4-4F86-9780-78CF6D5D3A25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "koi jabo.Tests", "koi jabo.Tests\koi jabo.Tests.csproj", "{E6BF6C43-12C7-4EB8-95FC-7971964DDF95}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54C897B0-50E4-4F86-9780-78CF6D5D3A25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54C897B0-50E4-4F86-9780-78CF6D5D3A25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54C897B0-50E4-4F86-9780-78CF6D5D3A25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54C897B0-50E4-4F86-9780-78CF6D5D3A25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6BF6C43-12C7-4EB8-95FC-7971964DDF95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6BF6C43-12C7-4EB8-95FC-7971964DDF95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6BF6C43-12C7-4EB8-95FC-7971964DDF95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6BF6C43-12C7-4EB8-95FC-7971964DDF95}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
