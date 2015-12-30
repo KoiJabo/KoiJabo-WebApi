@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Web.Http;
 using MongoDB.Bson.Serialization;
+using koi_jabo.Lib.Helper;
 
 namespace koi_jabo.Controllers
 {
@@ -31,10 +32,21 @@ namespace koi_jabo.Controllers
             return Json(model);
         }
 
+        [HttpGet]
+        public async Task<IHttpActionResult> Search(SearchParams options)
+        {
+            var Collection = context.Database.GetCollection<BsonDocument>("Restaurants");
+            var req = Request.GetQueryNameValuePairs();
+            var queryString = SearchParams.GetSearchFilter(req);
+            var searchResult = Collection.Find(queryString).ToListAsync();
+            var result = BsonSerializer.Deserialize<RestaurantEntity>(searchResult.Result[0]);
+            return Json(result);
+        }
 
         [HttpGet]
-        public async Task<IHttpActionResult> Get(string id=null, int start=0, int limit=25)
+        public async Task<IHttpActionResult> Get(string id=null, int start=-1, int limit=-1)
         {
+            
             try
             {
                 if (id != null)
@@ -42,14 +54,23 @@ namespace koi_jabo.Controllers
                     //var filter = Builders<RestaurantEntity>.Filter.Where(x => x._id == id);
                     //var one = await context.Restaurants.Find(filter).FirstOrDefaultAsync();
                     var _id = ObjectId.Parse("5681f4f2cb71ac1598308f93");
-                    var filter = Builders<BsonDocument>.Filter.Eq("Area", "Dhanmondi");
-                    var one = context.Database.GetCollection<BsonDocument>("Restaurants").Find(filter).ToListAsync();
 
+                    var FilterQuery = Builders<BsonDocument>.Filter;
+                    var ProjectQuery = Builders<BsonDocument>.Projection;
+                    var Collection = context.Database.GetCollection<BsonDocument>("Restaurants");
+
+                    var filter = FilterQuery.Eq("TakeReservations", true) & FilterQuery.Eq("Delivery", false);
+                    var project = ProjectQuery.Exclude("");
+
+                    //var one = Collection.Find(filter).Project(project).ToListAsync();
+                    FilterDefinition<BsonDocument> searchFilter = "{'TakeReservations': true}";
+                    var one = Collection.Find(searchFilter).ToListAsync();
+                    //var result = BsonSerializer.Deserialize<RestaurantEntity>(one.Result[0]);
                     var result = BsonSerializer.Deserialize<RestaurantEntity>(one.Result[0]);
-                      
+
                     return Json(result);
                 }
-                else if (start != null && limit != null)
+                else if (start != -1 && limit != -1)
                 {
                     var filter = new BsonDocument();
                     var allInTheRange = await context.Restaurants.Find(filter).Skip(start).Limit(limit).ToListAsync();

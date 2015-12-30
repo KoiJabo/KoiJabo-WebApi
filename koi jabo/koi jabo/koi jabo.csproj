@@ -131,10 +131,12 @@
     <Compile Include="Lib\DBConnection\IMongoContext.cs" />
     <Compile Include="Lib\DBConnection\KoiJaboMongoDataContext.cs" />
     <Compile Include="Lib\DBConnection\MongoCollectionName.cs" />
+    <Compile Include="Lib\Helper\SearchParams.cs" />
     <Compile Include="Models\GeoJson\IGeoJsonEntity.cs" />
     <Compile Include="Models\GeoJson\Point.cs" />
     <Compile Include="Models\OpenCloseTime\OpenCloseTimeModel.cs" />
     <Compile Include="Models\RestaurantModel.cs" />
+    <Compile Include="Entity\RestaurantSummaryEntity.cs" />
     <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -166,7 +168,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>19078</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:8001/</IISUrl>
+          <IISUrl>http://localhost:8002/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

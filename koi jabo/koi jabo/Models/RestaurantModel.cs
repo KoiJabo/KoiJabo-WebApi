@@ -30,9 +30,10 @@ namespace koi_jabo.Models
         public double AmbienceRating { get; set; }
         public double ServiceRating { get; set; }
         public double FoodRating { get; set; }
+        public int CostRating { get; set; }
         public string PhoneNumber { get; set; }
         public string CostPerPerson { get; set; }
-
+        public int CostUpperLimit { get; set; }
         public bool TakeReservations { get; set; }
         public bool Delivery { get; set; }
         public bool OutdoorSeating { get; set; }

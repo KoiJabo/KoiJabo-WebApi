@@ -34,8 +34,10 @@ namespace koi_jabo.Entity
             this.AmbienceRating = model.AmbienceRating;
             this.ServiceRating = model.ServiceRating;
             this.FoodRating = model.FoodRating;
+            this.CostRating = model.CostRating;
             this.PhoneNumber = model.PhoneNumber;
             this.CostPerPerson = model.CostPerPerson;
+            this.CostUpperLimit = model.CostUpperLimit;
             this.TakeReservations = model.TakeReservations;
             this.Delivery = model.Delivery;
             this.OutdoorSeating = model.OutdoorSeating;
