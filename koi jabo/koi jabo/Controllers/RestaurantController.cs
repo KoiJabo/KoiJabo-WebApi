@@ -16,6 +16,8 @@ namespace koi_jabo.Controllers
     public class RestaurantController : ApiController
     {
         KoiJaboMongoDataContext context = new KoiJaboMongoDataContext();
+
+        [HttpPost]
         public async Task<IHttpActionResult> Create(RestaurantModel model)
         {
             if (!ModelState.IsValid)
@@ -27,15 +29,68 @@ namespace koi_jabo.Controllers
             return Json(model);
         }
 
-        //public async Task<IEnumerable<TrackerInfo>> Find(bool isAssigned, int skip, int limit)
-        //{
-        //    return await this._context.Trackers.Find(x => x.IsAssigned == isAssigned).Skip(skip).Limit(limit).ToListAsync();
-        //}
-        public async Task<IHttpActionResult> Getall()
+
+        [HttpGet]
+        public async Task<IHttpActionResult> Get(string id, int start=0, int limit=25)
         {
-            var filter = new BsonDocument();
-            var all = await context.Restaurants.Find(filter: filter).ToListAsync();
-            return Json(all);
+            try
+            {
+                if (id != null)
+                {
+                    var filter = Builders<RestaurantEntity>.Filter.Where(x => x._id == id);
+                    var one = await context.Restaurants.Find(filter).FirstOrDefaultAsync();
+                    return Json(one);
+                }
+                else if (start != null && limit != null)
+                {
+                    var filter = new BsonDocument();
+                    var allInTheRange = await context.Restaurants.Find(filter).Skip(start).Limit(limit).ToListAsync();
+                    return Json(allInTheRange);
+                }
+                else
+                {
+                    var filter = new BsonDocument();
+                    var all = await context.Restaurants.Find(filter: filter).ToListAsync();
+                    return Json(all);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IHttpActionResult> Update(RestaurantEntity restaurant)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var filter = Builders<RestaurantEntity>.Filter.Where(x => x._id == restaurant._id);
+            var updatedRestaurant = await context.Restaurants.ReplaceOneAsync(filter, restaurant);
+            return Json(updatedRestaurant);
+        }
+
+        [HttpDelete]
+        public async Task<IHttpActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return BadRequest("Id can not be null");            
+            }
+
+            try
+            {
+                var filter = Builders<RestaurantEntity>.Filter.Where(x => x._id == id);
+                var deleteRestaurant = await context.Restaurants.DeleteOneAsync(filter);
+                return Json(deleteRestaurant);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
