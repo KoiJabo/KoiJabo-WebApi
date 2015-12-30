@@ -33,16 +33,16 @@ namespace koi_jabo.Entity
 
         }
 
-        public RestaurantSummaryEntity(RestaurantModel model)
+        public RestaurantSummaryEntity(RestaurantEntity entity)
         {
-            this.Name = model.Name;
-            this.Area = model.Area;
-            this.Cuisines = model.Cuisines;
-            this.GeneralRatingRating = model.GeneralRatingRating;
-            this.AmbienceRating = model.AmbienceRating;
-            this.ServiceRating = model.ServiceRating;
-            this.FoodRating = model.FoodRating;
-            this.CostRating = model.CostRating;
+            this.Name = entity.Name;
+            this.Area = entity.Area;
+            this.Cuisines = entity.Cuisines;
+            this.GeneralRatingRating = entity.GeneralRatingRating;
+            this.AmbienceRating = entity.AmbienceRating;
+            this.ServiceRating = entity.ServiceRating;
+            this.FoodRating = entity.FoodRating;
+            this.CostRating = entity.CostRating;
         }
     }
 }

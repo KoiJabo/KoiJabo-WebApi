@@ -35,55 +35,28 @@ namespace koi_jabo.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> Search(SearchParams options)
         {
-            var Collection = context.Database.GetCollection<BsonDocument>("Restaurants");
-            var req = Request.GetQueryNameValuePairs();
-            var queryString = SearchParams.GetSearchFilter(req);
-            var searchResult = Collection.Find(queryString).ToListAsync();
-            var result = BsonSerializer.Deserialize<RestaurantEntity>(searchResult.Result[0]);
-            return Json(result);
+            var Collection = context.Database.GetCollection<RestaurantEntity>("Restaurants");
+            var queryString = SearchParams.GetSearchFilter(Request.GetQueryNameValuePairs());
+            var searchResult = await Collection.Find(queryString).ToListAsync();
+            var list = new List<RestaurantSummaryEntity>();
+            foreach (var item in searchResult)
+            {
+                var result = new RestaurantSummaryEntity(item);
+                list.Add(result);
+            }
+            return Json(list);
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> Get(string id=null, int start=-1, int limit=-1)
-        {
-            
+        public async Task<IHttpActionResult> Get(string id=null)
+        {            
             try
             {
-                if (id != null)
-                {
-                    //var filter = Builders<RestaurantEntity>.Filter.Where(x => x._id == id);
-                    //var one = await context.Restaurants.Find(filter).FirstOrDefaultAsync();
-                    var _id = ObjectId.Parse("5681f4f2cb71ac1598308f93");
-
-                    var FilterQuery = Builders<BsonDocument>.Filter;
-                    var ProjectQuery = Builders<BsonDocument>.Projection;
-                    var Collection = context.Database.GetCollection<BsonDocument>("Restaurants");
-
-                    var filter = FilterQuery.Eq("TakeReservations", true) & FilterQuery.Eq("Delivery", false);
-                    var project = ProjectQuery.Exclude("");
-
-                    //var one = Collection.Find(filter).Project(project).ToListAsync();
-                    FilterDefinition<BsonDocument> searchFilter = "{'TakeReservations': true}";
-                    var one = Collection.Find(searchFilter).ToListAsync();
-                    //var result = BsonSerializer.Deserialize<RestaurantEntity>(one.Result[0]);
-                    var result = BsonSerializer.Deserialize<RestaurantEntity>(one.Result[0]);
-
-                    return Json(result);
-                }
-                else if (start != -1 && limit != -1)
-                {
-                    var filter = new BsonDocument();
-                    var allInTheRange = await context.Restaurants.Find(filter).Skip(start).Limit(limit).ToListAsync();
-                    return Json(allInTheRange);
-                }
-                else
-                {
-                    var filter = new BsonDocument();
-                    var all = await context.Restaurants.Find(filter: filter).ToListAsync();
-                    var json = Json(all);
-                    return Json(all);
-                }
-
+                
+                var _id = "{_id : ObjectId(\"" + id + "\")}";
+                
+                var one = await context.Restaurants.Find(x=>x._id == id).SingleAsync();
+                return Json(one);
             }
             catch (Exception ex)
             {
@@ -110,7 +83,6 @@ namespace koi_jabo.Controllers
             {
                 return BadRequest("Id can not be null");            
             }
-
             try
             {
                 var filter = Builders<RestaurantEntity>.Filter.Where(x => x._id == id);
