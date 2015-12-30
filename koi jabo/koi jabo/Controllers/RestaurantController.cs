@@ -8,8 +8,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Web.Http;
+using MongoDB.Bson.Serialization;
 
 namespace koi_jabo.Controllers
 {
@@ -31,15 +33,21 @@ namespace koi_jabo.Controllers
 
 
         [HttpGet]
-        public async Task<IHttpActionResult> Get(string id, int start=0, int limit=25)
+        public async Task<IHttpActionResult> Get(string id=null, int start=0, int limit=25)
         {
             try
             {
                 if (id != null)
                 {
-                    var filter = Builders<RestaurantEntity>.Filter.Where(x => x._id == id);
-                    var one = await context.Restaurants.Find(filter).FirstOrDefaultAsync();
-                    return Json(one);
+                    //var filter = Builders<RestaurantEntity>.Filter.Where(x => x._id == id);
+                    //var one = await context.Restaurants.Find(filter).FirstOrDefaultAsync();
+                    var _id = ObjectId.Parse("5681f4f2cb71ac1598308f93");
+                    var filter = Builders<BsonDocument>.Filter.Eq("Area", "Dhanmondi");
+                    var one = context.Database.GetCollection<BsonDocument>("Restaurants").Find(filter).ToListAsync();
+
+                    var result = BsonSerializer.Deserialize<RestaurantEntity>(one.Result[0]);
+                      
+                    return Json(result);
                 }
                 else if (start != null && limit != null)
                 {
@@ -51,6 +59,7 @@ namespace koi_jabo.Controllers
                 {
                     var filter = new BsonDocument();
                     var all = await context.Restaurants.Find(filter: filter).ToListAsync();
+                    var json = Json(all);
                     return Json(all);
                 }
 

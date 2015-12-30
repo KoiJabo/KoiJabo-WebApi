@@ -135,6 +135,7 @@
     <Compile Include="Models\GeoJson\Point.cs" />
     <Compile Include="Models\OpenCloseTime\OpenCloseTimeModel.cs" />
     <Compile Include="Models\RestaurantModel.cs" />
+    <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
