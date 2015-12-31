@@ -1,4 +1,5 @@
 ﻿using koi_jabo.Models.GeoJson;
+using koi_jabo.Models.OpenCloseTime;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,10 +14,7 @@ namespace koi_jabo.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Restaurant Area must be provided")]
-        public string Area { get; set; }
-
-        [Required(ErrorMessage = "Restaurant Cuisine must be provided")]
-        public List<string> Cuisines { get; set; }
+        public string Area { get; set; }        
 
         [Required(ErrorMessage ="Restaurant address must be provided")]
         public string Address { get; set; }
@@ -24,32 +22,27 @@ namespace koi_jabo.Models
         [Required(ErrorMessage = "Restaurant GeoCoordinate must be provided")]
         public Point GeoPoint { get; set; }
 
-        public List<DayOfWeek> TimeTable { get; set; }
+        public List<OpenCloseTimeModel> TimeTable { get; set; }
 
         public double GeneralRatingRating { get; set; }
         public double AmbienceRating { get; set; }
         public double ServiceRating { get; set; }
         public double FoodRating { get; set; }
+
+        [Required(ErrorMessage ="Costrating must be given")]
         public int CostRating { get; set; }
+
         public string PhoneNumber { get; set; }
         public string CostPerPerson { get; set; }
+
+        [Required(ErrorMessage = "CostUpperLimit must be given")]
         public int CostUpperLimit { get; set; }
-        public bool TakeReservations { get; set; }
-        public bool Delivery { get; set; }
-        public bool OutdoorSeating { get; set; }
-        public bool Casual { get; set; }
-        public bool Gossip { get; set; }
-        public bool Hangout { get; set; }
-        public bool Meetings { get; set; }
-        public bool Visa { get; set; }
-        public bool Master { get; set; }
-        public bool Nexus { get; set; }
-        public bool AmericanExpress { get; set; }
-        public bool Parking { get; set; }
-        public bool Ac { get; set; }
 
-        public List<string> Tags { get; set; }
-
+        [Required(ErrorMessage = "CostLowerLimit must be given")]
+        public int CostLowerLimit { get; set; }
+        
+        public List<string> Tags { get; set; }        
+        public List<string> Cuisines { get; set; }
 
 
     }

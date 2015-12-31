@@ -11,18 +11,8 @@ namespace koi_jabo.Models.OpenCloseTime
     public class OpenCloseTimeModel
     {
         [JsonConverter(typeof(StringEnumConverter))]
-        public WeekDay Day { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-    }
-    public enum WeekDay
-    {
-        Saturday,
-        Sunday,
-        Monday,
-        Tuesday,
-        Wednesday,
-        Thursday,
-        Friday
-    }
+        public DayOfWeek Day { get; set; }
+        public int StartTime { get; set; }
+        public int EndTime { get; set; }
+    }    
 }

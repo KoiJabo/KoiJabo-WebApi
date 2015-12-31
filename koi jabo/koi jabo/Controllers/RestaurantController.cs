@@ -27,22 +27,31 @@ namespace koi_jabo.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            model.CostPerPerson = model.CostLowerLimit.ToString() + " - " + model.CostUpperLimit.ToString() + " taka";
             await context.Restaurants.InsertOneAsync(new RestaurantEntity(model));
             return Json(model);
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> Search(SearchParams options)
+        public async Task<IHttpActionResult> Search()
         {
             var Collection = context.Database.GetCollection<RestaurantEntity>("Restaurants");
-            var queryString = SearchParams.GetSearchFilter(Request.GetQueryNameValuePairs());
-            var searchResult = await Collection.Find(queryString).ToListAsync();
+            var queryStringParameter = Request.GetQueryNameValuePairs();
+            var searchFilter = SearchRestaurants.GetSearchFilter(queryStringParameter);
+            var searchResult = await Collection.Find(searchFilter).ToListAsync();
             var list = new List<RestaurantSummaryEntity>();
             foreach (var item in searchResult)
             {
+                // NEED TO FIX THIS
+                KeyValuePair<string, string> pair = new KeyValuePair<string, string>("IsOpenNow", "true");
+                bool isOpenNow = queryStringParameter.Contains(pair);
+                if (isOpenNow) item.IsOpenNow = OpenOrCloseDetector.Detect(item);
+                // NEED TO FIX THIS
+                
+                                                
                 var result = new RestaurantSummaryEntity(item);
                 list.Add(result);
+
             }
             return Json(list);
         }

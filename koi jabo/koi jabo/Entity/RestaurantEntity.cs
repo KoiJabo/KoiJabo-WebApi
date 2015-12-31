@@ -38,20 +38,22 @@ namespace koi_jabo.Entity
             this.PhoneNumber = model.PhoneNumber;
             this.CostPerPerson = model.CostPerPerson;
             this.CostUpperLimit = model.CostUpperLimit;
-            this.TakeReservations = model.TakeReservations;
-            this.Delivery = model.Delivery;
-            this.OutdoorSeating = model.OutdoorSeating;
-            this.Casual = model.Casual;
-            this.Gossip = model.Gossip;
-            this.Hangout = model.Hangout;
-            this.Meetings = model.Meetings;
-            this.Visa = model.Visa;
-            this.Master = model.Master;
-            this.Nexus = model.Nexus;
-            this.AmericanExpress = model.AmericanExpress;
-            this.Parking = model.Parking;
-            this.Ac = model.Ac;
+            
+            //this.TakeReservations = model.TakeReservations;
+            //this.Delivery = model.Delivery;
+            //this.OutdoorSeating = model.OutdoorSeating;
+            //this.Casual = model.Casual;
+            //this.Gossip = model.Gossip;
+            //this.Hangout = model.Hangout;
+            //this.Meetings = model.Meetings;
+            //this.Visa = model.Visa;
+            //this.Master = model.Master;
+            //this.Nexus = model.Nexus;
+            //this.AmericanExpress = model.AmericanExpress;
+            //this.Parking = model.Parking;
+            //this.Ac = model.Ac;
             this.Tags = model.Tags;
+            this.Cuisines = model.Cuisines;
         }
     }
 }

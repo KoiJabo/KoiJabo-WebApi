@@ -35,8 +35,10 @@ namespace koi_jabo.Entity
 
         public RestaurantSummaryEntity(RestaurantEntity entity)
         {
+            this._id = entity._id;
             this.Name = entity.Name;
             this.Area = entity.Area;
+            this.IsOpenNow = entity.IsOpenNow;
             this.Cuisines = entity.Cuisines;
             this.GeneralRatingRating = entity.GeneralRatingRating;
             this.AmbienceRating = entity.AmbienceRating;
