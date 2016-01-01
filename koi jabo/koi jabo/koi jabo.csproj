@@ -131,6 +131,7 @@
     <Compile Include="Lib\DBConnection\IMongoContext.cs" />
     <Compile Include="Lib\DBConnection\KoiJaboMongoDataContext.cs" />
     <Compile Include="Lib\DBConnection\MongoCollectionName.cs" />
+    <Compile Include="Lib\Helper\CalculateDistance.cs" />
     <Compile Include="Lib\Helper\OpenOrCloseDetector.cs" />
     <Compile Include="Lib\Helper\SearchRestaurants.cs" />
     <Compile Include="Models\Enums.cs" />
@@ -170,7 +171,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>19078</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:8080/</IISUrl>
+          <IISUrl>http://localhost:8081/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

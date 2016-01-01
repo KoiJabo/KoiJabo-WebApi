@@ -25,6 +25,10 @@ namespace koi_jabo.Lib.DBConnection
             Database = mongoClient.GetDatabase(mongoUrlBuilder.DatabaseName);
 
             _restaurants = Database.GetCollection<RestaurantEntity>(MongoCollectionNames.RestaurantsCollectionName);
+
+            CreateIndexOptions GeoSphereindexOptions = new CreateIndexOptions();
+            GeoSphereindexOptions.SphereIndexVersion = 2;
+            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Geo2DSphere(x => x.GeoPoint), GeoSphereindexOptions);
         }
     }
 }

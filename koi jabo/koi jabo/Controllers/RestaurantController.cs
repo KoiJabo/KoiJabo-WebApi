@@ -36,24 +36,31 @@ namespace koi_jabo.Controllers
         public async Task<IHttpActionResult> Search()
         {
             var Collection = context.Database.GetCollection<RestaurantEntity>("Restaurants");
-            var queryStringParameter = Request.GetQueryNameValuePairs();
+            var queryStringParameter = Request.GetQueryNameValuePairs().ToDictionary(x=> x.Key, y=>y.Value);
             var searchFilter = SearchRestaurants.GetSearchFilter(queryStringParameter);
-            var searchResult = await Collection.Find(searchFilter).ToListAsync();
-            var list = new List<RestaurantSummaryEntity>();
-            foreach (var item in searchResult)
+            try
             {
-                // NEED TO FIX THIS
-                KeyValuePair<string, string> pair = new KeyValuePair<string, string>("IsOpenNow", "true");
-                bool isOpenNow = queryStringParameter.Contains(pair);
-                if (isOpenNow) item.IsOpenNow = OpenOrCloseDetector.Detect(item);
-                // NEED TO FIX THIS
-                
-                                                
-                var result = new RestaurantSummaryEntity(item);
-                list.Add(result);
+                var searchResult = await Collection.Find(searchFilter).ToListAsync();
+                var list = new List<RestaurantSummaryEntity>();
+                foreach (var item in searchResult)
+                {
+                    // NEED TO FIX THIS
+                    KeyValuePair<string, string> pair = new KeyValuePair<string, string>("IsOpenNow", "true");
+                    bool isOpenNow = queryStringParameter.Contains(pair);
+                    if (isOpenNow) item.IsOpenNow = OpenOrCloseDetector.Detect(item);
+                    // NEED TO FIX THIS
 
+
+                    var result = new RestaurantSummaryEntity(item);
+                    list.Add(result);
+
+                }
+                return Json(list);
             }
-            return Json(list);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]
@@ -69,7 +76,7 @@ namespace koi_jabo.Controllers
             }
             catch (Exception ex)
             {
-                return InternalServerError(ex);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -80,9 +87,16 @@ namespace koi_jabo.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var filter = Builders<RestaurantEntity>.Filter.Where(x => x._id == restaurant._id);
-            var updatedRestaurant = await context.Restaurants.ReplaceOneAsync(filter, restaurant);
-            return Json(updatedRestaurant);
+            try
+            {
+                var filter = Builders<RestaurantEntity>.Filter.Where(x => x._id == restaurant._id);
+                var updatedRestaurant = await context.Restaurants.ReplaceOneAsync(filter, restaurant);
+                return Json(updatedRestaurant);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete]
