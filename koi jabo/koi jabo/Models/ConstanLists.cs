@@ -26,7 +26,6 @@ namespace koi_jabo.Models
             tags.Add("Ac");
             return tags;
         }
-        
     }
 
     public static class Cuisines
@@ -99,12 +98,7 @@ namespace koi_jabo.Models
             cuisines.Add("Tibetan");
             cuisines.Add("Turkish");
             cuisines.Add("Vietnamese");
-
             return cuisines;
-        }
-        
-
-
-       
+        }      
     }
 }

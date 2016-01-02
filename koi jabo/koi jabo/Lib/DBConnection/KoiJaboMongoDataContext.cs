@@ -16,6 +16,12 @@ namespace koi_jabo.Lib.DBConnection
         private IMongoCollection<RestaurantEntity> _restaurants;
         public IMongoCollection<RestaurantEntity> Restaurants { get { return _restaurants; } }
 
+        private IMongoCollection<ReviewEntity> _reviews;
+        public IMongoCollection<ReviewEntity> Reviews { get { return _reviews; } }
+
+        private IMongoCollection<UserEntity> _users;
+        public IMongoCollection<UserEntity> Users { get { return _users; } }
+
         public KoiJaboMongoDataContext()
         {
             var connectionString = ConfigurationManager.ConnectionStrings["KoijaboMongo.ConnectionString"].ConnectionString;
@@ -25,6 +31,8 @@ namespace koi_jabo.Lib.DBConnection
             Database = mongoClient.GetDatabase(mongoUrlBuilder.DatabaseName);
 
             _restaurants = Database.GetCollection<RestaurantEntity>(MongoCollectionNames.RestaurantsCollectionName);
+            _reviews = Database.GetCollection<ReviewEntity>(MongoCollectionNames.ReviewsCollectionName);
+
 
             CreateIndexOptions GeoSphereindexOptions = new CreateIndexOptions();
             GeoSphereindexOptions.SphereIndexVersion = 2;

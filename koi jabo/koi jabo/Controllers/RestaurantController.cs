@@ -57,7 +57,7 @@ namespace koi_jabo.Controllers
                 }
                 return Json(list);
             }
-            catch (Exception ex)
+            catch (Exception ex) 
             {
                 return BadRequest(ex.Message);
             }

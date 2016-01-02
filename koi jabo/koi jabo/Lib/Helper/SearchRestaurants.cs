@@ -31,17 +31,15 @@ namespace koi_jabo.Lib.Helper
             var filter = Builders<RestaurantEntity>.Filter;
             var tagsParams = new List<string>();
             var cuisineParams = new List<string>();
+
             int maxDistanceinMeter = 0;
             int minDistanceinMeter = 0;
 
-            var location = new Point();
-            location.coordinates = new List<double>();
-            location.coordinates.Add(0);
-            location.coordinates.Add(0);
+            double latitude = 0;
+            double longitude = 0;
 
 
-            bool latitudeExist = false;
-            bool longitudedeExist = false;
+           
 
             foreach (var param in QueryParameters)
             {
@@ -63,13 +61,11 @@ namespace koi_jabo.Lib.Helper
                 }
                 else if (param.Key == "Latitude")
                 {
-                    latitudeExist = true;
-                    location.coordinates[1] = Convert.ToDouble(param.Value);
+                    latitude = Convert.ToDouble(param.Value);
                 }
                 else if (param.Key == "Longitude")
                 {
-                    longitudedeExist = true;
-                    location.coordinates[0] = Convert.ToDouble(param.Value);
+                    longitude = Convert.ToDouble(param.Value);
                 }
                 else if (param.Key == "MaxDistance")
                 {
@@ -96,11 +92,9 @@ namespace koi_jabo.Lib.Helper
                 }
             }
 
-            if (latitudeExist && longitudedeExist)
+            if (latitude != 0 && longitude != 0)
             {
-                var lon = location.coordinates[0];
-                var lat = location.coordinates[1];
-                GeoJsonPoint<GeoJson2DGeographicCoordinates> Point = new GeoJsonPoint<GeoJson2DGeographicCoordinates>(new GeoJson2DGeographicCoordinates(lon, lat));
+                GeoJsonPoint<GeoJson2DGeographicCoordinates> Point = new GeoJsonPoint<GeoJson2DGeographicCoordinates>(new GeoJson2DGeographicCoordinates(longitude, latitude));
                 FilterDefinitionBuilder<RestaurantEntity> builder = new FilterDefinitionBuilder<RestaurantEntity>();
                 searchFilter &= builder.Near<GeoJson2DGeographicCoordinates>(x => x.GeoPoint, Point, maxDistanceinMeter);
             }
