@@ -13,5 +13,7 @@ namespace koi_jabo.Lib.DBConnection
         IMongoDatabase Database { get; }
 
         IMongoCollection<RestaurantEntity> Restaurants { get; }
+        IMongoCollection<ReviewEntity> Reviews { get; }
+        IMongoCollection<UserEntity> Users { get; }
     }
 }

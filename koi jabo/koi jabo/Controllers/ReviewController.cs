@@ -46,7 +46,7 @@ namespace koi_jabo.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> GetReviews(string restaurantId = null, bool verfied = false)
+        public async Task<IHttpActionResult> GetReviews(string restaurantId = null, bool verfied = false, bool allreview=false)
         {
 
             try
@@ -54,6 +54,7 @@ namespace koi_jabo.Controllers
                 var filter = Builders<ReviewEntity>.Filter; 
                 var searchFilter = filter.Where(x=> x.RestaurantId == restaurantId);
                 if (verfied) searchFilter &= filter.Where(x => x.Verified == true);
+                else if (allreview) searchFilter &= new BsonDocument();
 
                 var all = await context.Reviews.Find(searchFilter).ToListAsync();
                 return Json(all);

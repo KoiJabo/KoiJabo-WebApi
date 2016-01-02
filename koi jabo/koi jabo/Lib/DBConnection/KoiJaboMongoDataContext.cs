@@ -32,7 +32,7 @@ namespace koi_jabo.Lib.DBConnection
 
             _restaurants = Database.GetCollection<RestaurantEntity>(MongoCollectionNames.RestaurantsCollectionName);
             _reviews = Database.GetCollection<ReviewEntity>(MongoCollectionNames.ReviewsCollectionName);
-
+            _users = Database.GetCollection<UserEntity>(MongoCollectionNames.UsersCollectionName);
 
             CreateIndexOptions GeoSphereindexOptions = new CreateIndexOptions();
             GeoSphereindexOptions.SphereIndexVersion = 2;

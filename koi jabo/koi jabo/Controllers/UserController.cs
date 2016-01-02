@@ -5,13 +5,14 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace koi_jabo.Controllers
 {
-    class UserController : ApiController
+    public class UserController : ApiController
     {
         KoiJaboMongoDataContext context = new KoiJaboMongoDataContext();
         [HttpPost]
@@ -21,9 +22,18 @@ namespace koi_jabo.Controllers
             {
                 return BadRequest(ModelState);
             }
+            try
+            {
+                UserEntity entity = new UserEntity(model);
+                await context.Users.InsertOneAsync(entity);
+                return Json(model);
+            }
+            catch (Exception ex)
+            {
 
-            await context.Users.InsertOneAsync(new UserEntity(model));
-            return Json(model);
+                throw ex;
+            }
+            
         }
 
         [HttpGet]
@@ -59,7 +69,7 @@ namespace koi_jabo.Controllers
                 return BadRequest(ex.Message);
             }
         }
-            
+
         [HttpDelete]
         public async Task<IHttpActionResult> Delete(string id)
         {
