@@ -13,9 +13,11 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using MongoDB.Bson.Serialization;
 using koi_jabo.Lib.Helper;
+using System.Web.Http.Cors;
 
 namespace koi_jabo.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class RestaurantController : ApiController
     {
         KoiJaboMongoDataContext context = new KoiJaboMongoDataContext();

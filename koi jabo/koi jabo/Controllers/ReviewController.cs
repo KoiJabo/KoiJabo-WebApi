@@ -10,9 +10,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using MongoDB.Bson;
+using System.Web.Http.Cors;
 
 namespace koi_jabo.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ReviewController : ApiController
     {
         KoiJaboMongoDataContext context = new KoiJaboMongoDataContext();
