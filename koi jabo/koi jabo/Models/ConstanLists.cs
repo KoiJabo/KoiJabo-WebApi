@@ -6,99 +6,110 @@ using System.Threading.Tasks;
 
 namespace koi_jabo.Models
 {
-    public static class Tags
-    {
-        public static List<string> GetTags()
-        {
-            List<string> tags = new List<string>();
-            tags.Add("TakeReservations");
-            tags.Add("Delivery");
-            tags.Add("OutdoorSeating");
-            tags.Add("Casual");
-            tags.Add("Gossip");
-            tags.Add("Hangout");
-            tags.Add("Meetings");
-            tags.Add("Visa");
-            tags.Add("Master");
-            tags.Add("Nexus");
-            tags.Add("AmericanExpress");
-            tags.Add("Parking");
-            tags.Add("Ac");
-            return tags;
-        }
-    }
-
-    public static class Cuisines
+    public static class ListOptions
     {
         public static List<string> GetCusines()
         {
             List<string> cuisines = new List<string>();
 
-            cuisines.Add("Deshi");
-            cuisines.Add("Biriyani");
-            cuisines.Add("Foodcart");
-            cuisines.Add("Pizza");
-            cuisines.Add("Japanese");
-            cuisines.Add("Thai");
-            cuisines.Add("Sandwich");
-            cuisines.Add("Mexican");
-            cuisines.Add("Burger");
-            cuisines.Add("FastFood");
-            cuisines.Add("Indian");
-            cuisines.Add("Online");
-            cuisines.Add("Bakery");
-            cuisines.Add("Italian");
-            cuisines.Add("Korean");
-            cuisines.Add("SeaFood");
-            cuisines.Add("Cafe");
             cuisines.Add("Afghani");
-            cuisines.Add("African");
-            cuisines.Add("American");
             cuisines.Add("Arabian");
             cuisines.Add("Asian");
-            cuisines.Add("Awadhi");
-            cuisines.Add("Bangladeshi");
+            cuisines.Add("Bakery");
             cuisines.Add("Bengali");
             cuisines.Add("Beverages");
-            cuisines.Add("Biryani");
-            cuisines.Add("Burmese");
+            cuisines.Add("Biriyani");
+            cuisines.Add("Bufet");
+            cuisines.Add("Burger");
+            cuisines.Add("Cafe");
             cuisines.Add("Chinese");
-            cuisines.Add("Continental");
             cuisines.Add("Desserts");
-            cuisines.Add("European");
-            cuisines.Add("FingerFood");
-            cuisines.Add("French");
-            cuisines.Add("Gujarati");
-            cuisines.Add("HealthyFood");
+            cuisines.Add("FastFood");
+            cuisines.Add("FoodCart");
             cuisines.Add("Hyderabadi");
             cuisines.Add("IceCream");
-            cuisines.Add("Indonesian");
+            cuisines.Add("Indian");
+            cuisines.Add("Italian");
             cuisines.Add("Juices");
-            cuisines.Add("Lebanese");
-            cuisines.Add("Lucknowi");
+            cuisines.Add("Korean");
             cuisines.Add("Mediterranean");
+            cuisines.Add("Mexican");
             cuisines.Add("MiddleEastern");
-            cuisines.Add("Mongolian");
             cuisines.Add("Mughlai");
-            cuisines.Add("Nepalese");
-            cuisines.Add("NorthEastern");
             cuisines.Add("NorthIndian");
-            cuisines.Add("Oriya");
-            cuisines.Add("Pakistani");
-            cuisines.Add("Parsi");
-            cuisines.Add("Rajasthani");
-            cuisines.Add("RawMeats");
-            cuisines.Add("Seafood");
-            cuisines.Add("Singaporean");
-            cuisines.Add("South");
+            cuisines.Add("Pizza");
+            cuisines.Add("Sandwich");
+            cuisines.Add("SeaFood");
             cuisines.Add("Spanish");
             cuisines.Add("Steakhouse");
             cuisines.Add("StreetFood");
             cuisines.Add("Sushi");
-            cuisines.Add("Tibetan");
+            cuisines.Add("Thai");
             cuisines.Add("Turkish");
-            cuisines.Add("Vietnamese");
             return cuisines;
         }      
+
+        public static List<string> GetCreditCards()
+        {
+            var creditCardList = new List<string>();
+            creditCardList.Add("Visa");
+            creditCardList.Add("Master");
+            creditCardList.Add("American Express");
+            creditCardList.Add("Nexus");
+
+            return creditCardList;
+        }
+
+        public static List<string> GetGoodForList()
+        {
+            var goodForList = new List<string>();
+
+            goodForList.Add("Meetings");
+            goodForList.Add("Families with children");
+            goodForList.Add("Large groups");
+            goodForList.Add("Local cuisine");
+            goodForList.Add("Romantic");
+            goodForList.Add("Gossip");
+            goodForList.Add("Hangout");
+
+            return goodForList;
+        }
+
+        public static List<string> GetParks()
+        {
+            var parkList = new List<string>();
+
+            parkList.Add("Street");
+            parkList.Add("Lot");
+            parkList.Add("Garaze");
+
+            return parkList;
+        }
+
+        public static List<string> GetAttires()
+        {
+            var attireList = new List<string>();
+
+            attireList.Add("Casual");
+            attireList.Add("Formal");
+
+            return attireList;
+        }
+    }
+
+    public class OptionsForDashBoard
+    {
+        public List<string> Cuisines { get; set; }
+        public List<string> CreditCards { get; set; }
+        public List<string> GoodFors { get; set; }
+        public List<string> Attires { get; set; }
+
+        public OptionsForDashBoard()
+        {
+            Cuisines = ListOptions.GetCusines();
+            CreditCards = ListOptions.GetCreditCards();
+            GoodFors = ListOptions.GetGoodForList();
+            Attires = ListOptions.GetAttires();
+        }
     }
 }

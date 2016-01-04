@@ -29,8 +29,9 @@ namespace koi_jabo.Lib.Helper
 
             searchFilter = Builders<RestaurantEntity>.Filter.Where(x => x.Name != null);
             var filter = Builders<RestaurantEntity>.Filter;
-            var tagsParams = new List<string>();
             var cuisineParams = new List<string>();
+            var creaditCardParams = new List<string>();
+            var goodForParams = new List<string>();
 
             int maxDistanceinMeter = 0;
             int minDistanceinMeter = 0;
@@ -76,14 +77,23 @@ namespace koi_jabo.Lib.Helper
                     minDistanceinMeter = Convert.ToInt32(param.Value);
                 }
 
-                foreach (var tag in Tags.GetTags())
+                foreach (var tag in ListOptions.GetCreditCards())
                 {
                     if (param.Key == tag && param.Value == "true")
                     {
-                        tagsParams.Add(tag);
+                        creaditCardParams.Add(tag);
                     }
                 }
-                foreach(var cuisine in Cuisines.GetCusines())
+
+                foreach (var tag in ListOptions.GetGoodForList())
+                {
+                    if (param.Key == tag && param.Value == "true")
+                    {
+                        goodForParams.Add(tag);
+                    }
+                }
+
+                foreach (var cuisine in ListOptions.GetCusines())
                 {
                     if (param.Key == cuisine && param.Value == "true")
                     {
@@ -98,9 +108,13 @@ namespace koi_jabo.Lib.Helper
                 FilterDefinitionBuilder<RestaurantEntity> builder = new FilterDefinitionBuilder<RestaurantEntity>();
                 searchFilter &= builder.Near<GeoJson2DGeographicCoordinates>(x => x.GeoPoint, Point, maxDistanceinMeter);
             }
-            if (tagsParams.Count != 0)
+            if (creaditCardParams.Count != 0)
             {
-                searchFilter &= filter.In("Tags", tagsParams);
+                searchFilter &= filter.In("CreditCards", creaditCardParams);
+            }
+            if (goodForParams.Count != 0)
+            {
+                searchFilter &= filter.In("GoodFor", goodForParams);
             }
             if (cuisineParams.Count != 0)
             {

@@ -28,8 +28,7 @@ namespace koi_jabo.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-            model.CostPerPerson = model.CostLowerLimit.ToString() + " - " + model.CostUpperLimit.ToString() + " taka";
+            }            
             await context.Restaurants.InsertOneAsync(new RestaurantEntity(model));
             return Json(model);
         }
@@ -64,7 +63,11 @@ namespace koi_jabo.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [HttpGet]
+        public async Task<IHttpActionResult> GetOptionsForDashBoard()
+        {
+            return Json(new OptionsForDashBoard());
+        }
         [HttpGet]
         public async Task<IHttpActionResult> Get(string id=null)
         {            

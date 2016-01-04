@@ -19,6 +19,8 @@ namespace koi_jabo.Entity
         public bool IsOpenNow { get; set; }
         [BsonIgnore]
         public double Distance { get; set; }
+        [BsonIgnore]
+        public string CostPerPerson { get; set; }
         public RestaurantEntity()
         {
 
@@ -34,25 +36,24 @@ namespace koi_jabo.Entity
             this.AmbienceRating = model.AmbienceRating;
             this.ServiceRating = model.ServiceRating;
             this.FoodRating = model.FoodRating;
-            this.CostRating = model.CostRating;
+            this.CostLevel = model.CostLevel;
             this.PhoneNumber = model.PhoneNumber;
-            this.CostPerPerson = model.CostPerPerson;
+            this.CostPerPerson = model.CostLowerLimit.ToString() + " - " + model.CostUpperLimit.ToString() + " taka"; ;
             this.CostUpperLimit = model.CostUpperLimit;
-            
-            //this.TakeReservations = model.TakeReservations;
-            //this.Delivery = model.Delivery;
-            //this.OutdoorSeating = model.OutdoorSeating;
-            //this.Casual = model.Casual;
-            //this.Gossip = model.Gossip;
-            //this.Hangout = model.Hangout;
-            //this.Meetings = model.Meetings;
-            //this.Visa = model.Visa;
-            //this.Master = model.Master;
-            //this.Nexus = model.Nexus;
-            //this.AmericanExpress = model.AmericanExpress;
-            //this.Parking = model.Parking;
-            //this.Ac = model.Ac;
-            this.Tags = model.Tags;
+
+            this.CreditCards = model.CreditCards;
+            this.GoodFor = model.GoodFor;
+            this.Parking = model.Parking;
+            this.Attire = model.Attire;
+
+            this.Rooftop = model.Rooftop;
+            this.Reservation = model.Reservation;
+            this.Delivery = model.Delivery;
+            this.OutDoor = model.OutDoor;
+            this.Wifi = model.Wifi;
+            this.Tv = model.Tv;
+            this.CandleLight = model.CandleLight;
+            this.LuxuryDining = model.LuxuryDining;                      
             this.Cuisines = model.Cuisines;
         }
     }

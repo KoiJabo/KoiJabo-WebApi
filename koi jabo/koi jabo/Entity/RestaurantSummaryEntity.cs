@@ -44,7 +44,7 @@ namespace koi_jabo.Entity
             this.AmbienceRating = entity.AmbienceRating;
             this.ServiceRating = entity.ServiceRating;
             this.FoodRating = entity.FoodRating;
-            this.CostRating = entity.CostRating;
+            this.CostRating = entity.CostLevel;
         }
     }
 }
