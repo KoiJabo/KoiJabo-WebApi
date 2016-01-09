@@ -53,12 +53,12 @@ namespace koi_jabo.Models
         {
             var establishmentTypeList = new List<string>();
             establishmentTypeList.Add("Casual Dining");
-            establishmentTypeList.Add(" Quick Bites");
-            establishmentTypeList.Add(" Dessert Parlor");
+            establishmentTypeList.Add("Quick Bites");
+            establishmentTypeList.Add("Dessert Parlor");
             establishmentTypeList.Add("Bakeries");
             establishmentTypeList.Add("Sweat Shops");
             establishmentTypeList.Add("Cafes");
-            establishmentTypeList.Add(" Food Courts");
+            establishmentTypeList.Add("Food Courts");
 
             return establishmentTypeList;
         }
@@ -117,13 +117,15 @@ namespace koi_jabo.Models
         public List<string> CreditCards { get; set; }
         public List<string> GoodFors { get; set; }
         public List<string> Attires { get; set; }
-
+        public List<string> EstablishmentType { get; set; }
+        
         public OptionsForDashBoard()
         {
             Cuisines = ListOptions.GetCusines();
             CreditCards = ListOptions.GetCreditCards();
             GoodFors = ListOptions.GetGoodForList();
             Attires = ListOptions.GetAttires();
+            EstablishmentType = ListOptions.GetEstablishmentTypes();
         }
     }
 }
