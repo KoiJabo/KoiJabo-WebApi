@@ -49,6 +49,20 @@ namespace koi_jabo.Models
             return cuisines;
         }      
 
+        public static List<string> GetEstablishmentTypes()
+        {
+            var establishmentTypeList = new List<string>();
+            establishmentTypeList.Add("Casual Dining");
+            establishmentTypeList.Add(" Quick Bites");
+            establishmentTypeList.Add(" Dessert Parlor");
+            establishmentTypeList.Add("Bakeries");
+            establishmentTypeList.Add("Sweat Shops");
+            establishmentTypeList.Add("Cafes");
+            establishmentTypeList.Add(" Food Courts");
+
+            return establishmentTypeList;
+        }
+
         public static List<string> GetCreditCards()
         {
             var creditCardList = new List<string>();

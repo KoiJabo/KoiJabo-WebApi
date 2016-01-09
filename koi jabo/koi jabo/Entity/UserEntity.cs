@@ -13,7 +13,6 @@ namespace koi_jabo.Entity
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string _id { get; set; }
-
         public UserEntity()
         {
 

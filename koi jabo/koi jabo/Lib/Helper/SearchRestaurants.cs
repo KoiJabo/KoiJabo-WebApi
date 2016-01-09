@@ -32,6 +32,7 @@ namespace koi_jabo.Lib.Helper
             var cuisineParams = new List<string>();
             var creaditCardParams = new List<string>();
             var goodForParams = new List<string>();
+            var establishmentTypeParams = new List<string>();
 
             int maxDistanceinMeter = 0;
             int minDistanceinMeter = 0;
@@ -84,6 +85,13 @@ namespace koi_jabo.Lib.Helper
                         creaditCardParams.Add(tag);
                     }
                 }
+                foreach (var tag in ListOptions.GetEstablishmentTypes())
+                {
+                    if (param.Key == tag && param.Value == "true")
+                    {
+                        establishmentTypeParams.Add(tag);
+                    }
+                }
 
                 foreach (var tag in ListOptions.GetGoodForList())
                 {
@@ -111,6 +119,10 @@ namespace koi_jabo.Lib.Helper
             if (creaditCardParams.Count != 0)
             {
                 searchFilter &= filter.In("CreditCards", creaditCardParams);
+            }
+            if (establishmentTypeParams.Count != 0)
+            {
+                searchFilter &= filter.In("EstablishmentType", establishmentTypeParams);
             }
             if (goodForParams.Count != 0)
             {

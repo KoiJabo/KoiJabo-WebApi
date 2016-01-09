@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace koi_jabo.Lib.DBConnection
+namespace koi_jabo.Lib.MongoContext
 {
     public class MongoCollectionNames
     {

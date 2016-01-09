@@ -31,8 +31,6 @@ namespace koi_jabo.Models
         public double ServiceRating { get; set; }
         public double FoodRating { get; set; }
 
-        [Required(ErrorMessage ="Costrating must be given")]
-        public int CostLevel { get; set; }
 
         public string PhoneNumber { get; set; }
         
@@ -46,10 +44,14 @@ namespace koi_jabo.Models
 
         public List<string> CreditCards { get; set; }
         public List<string> GoodFor { get; set; }
+        public List<string> Cuisines { get; set; }
+        public List<string> EstablishmentType { get; set; }
+
 
         public string Parking { get; set; }
 
         public string Attire { get; set; }
+        public string NoiseLevel { get; set; }
 
         public bool Rooftop { get; set; }
         public bool Reservation { get; set; }
@@ -60,7 +62,11 @@ namespace koi_jabo.Models
         public bool Tv { get; set; }
         public bool CandleLight { get; set; }
         public bool LuxuryDining { get; set; }
-        public List<string> Cuisines { get; set; }
+
+        public bool Washroom { get; set; }
+        public bool Toilet { get; set; }
+        
+        
 
 
     }

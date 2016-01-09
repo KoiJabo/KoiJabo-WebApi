@@ -1,5 +1,4 @@
 ﻿using koi_jabo.Entity;
-using koi_jabo.Lib.DBConnection;
 using koi_jabo.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -13,7 +12,10 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using MongoDB.Bson.Serialization;
 using koi_jabo.Lib.Helper;
+using koi_jabo.Lib.Repository.Restaurant;
 using System.Web.Http.Cors;
+using koi_jabo.Lib.MongoContext;
+using Newtonsoft.Json.Linq;
 
 namespace koi_jabo.Controllers
 {
@@ -21,41 +23,48 @@ namespace koi_jabo.Controllers
     public class RestaurantController : ApiController
     {
         KoiJaboMongoDataContext context = new KoiJaboMongoDataContext();
-
+        RestaurantRepository _repository;
+        public RestaurantController()
+        {
+            _repository = new RestaurantRepository();
+        }
         [HttpPost]
         public async Task<IHttpActionResult> Create(RestaurantModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }            
-            await context.Restaurants.InsertOneAsync(new RestaurantEntity(model));
-            return Json(model);
+            }
+            var entity = await _repository.Create(model);
+            return Json(entity);
+        }
+
+        [HttpPost]
+        public async Task<IHttpActionResult> FormDataInput(List<RestaurantFormValue> value)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var entity = await _repository.FormDataInput(value);
+                return Json(true);
+            }
+            catch(Exception e)
+            {
+                return Json(false);
+            }
+            
         }
 
         [HttpGet]
         public async Task<IHttpActionResult> Search()
         {
-            var Collection = context.Database.GetCollection<RestaurantEntity>("Restaurants");
-            var queryStringParameter = Request.GetQueryNameValuePairs().ToDictionary(x=> x.Key, y=>y.Value);
-            var searchFilter = SearchRestaurants.GetSearchFilter(queryStringParameter);
             try
             {
-                var searchResult = await Collection.Find(searchFilter).ToListAsync();
-                var list = new List<RestaurantSummaryEntity>();
-                foreach (var item in searchResult)
-                {
-                    // NEED TO FIX THIS
-                    KeyValuePair<string, string> pair = new KeyValuePair<string, string>("IsOpenNow", "true");
-                    bool isOpenNow = queryStringParameter.Contains(pair);
-                    if (isOpenNow) item.IsOpenNow = OpenOrCloseDetector.Detect(item);
-                    // NEED TO FIX THIS
-
-
-                    var result = new RestaurantSummaryEntity(item);
-                    list.Add(result);
-
-                }
+                var list = await _repository.Search(Request);               
                 return Json(list);
             }
             catch (Exception ex) 
@@ -64,7 +73,7 @@ namespace koi_jabo.Controllers
             }
         }
         [HttpGet]
-        public async Task<IHttpActionResult> GetOptionsForDashBoard()
+        public IHttpActionResult GetOptionsForDashBoard()
         {
             return Json(new OptionsForDashBoard());
         }
@@ -72,11 +81,8 @@ namespace koi_jabo.Controllers
         public async Task<IHttpActionResult> Get(string id=null)
         {            
             try
-            {
-                
-                var _id = "{_id : ObjectId(\"" + id + "\")}";
-                
-                var one = await context.Restaurants.Find(x=>x._id == id).SingleAsync();
+            {                
+                var one = await _repository.Get(id);
                 return Json(one);
             }
             catch (Exception ex)
@@ -94,8 +100,7 @@ namespace koi_jabo.Controllers
             }
             try
             {
-                var filter = Builders<RestaurantEntity>.Filter.Where(x => x._id == restaurant._id);
-                var updatedRestaurant = await context.Restaurants.ReplaceOneAsync(filter, restaurant);
+                var updatedRestaurant = _repository.Update(restaurant);
                 return Json(updatedRestaurant);
             }
             catch (Exception ex)
@@ -113,8 +118,7 @@ namespace koi_jabo.Controllers
             }
             try
             {
-                var filter = Builders<RestaurantEntity>.Filter.Where(x => x._id == id);
-                var deleteRestaurant = await context.Restaurants.DeleteOneAsync(filter);
+                var deleteRestaurant =_repository.Delete(id);                                
                 return Json(deleteRestaurant);
             }
             catch (Exception ex)

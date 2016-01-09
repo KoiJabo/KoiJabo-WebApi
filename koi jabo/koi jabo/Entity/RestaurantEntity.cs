@@ -21,6 +21,7 @@ namespace koi_jabo.Entity
         public double Distance { get; set; }
         [BsonIgnore]
         public string CostPerPerson { get; set; }
+        public int CostRating { get; set; }
         public RestaurantEntity()
         {
 
@@ -36,25 +37,32 @@ namespace koi_jabo.Entity
             this.AmbienceRating = model.AmbienceRating;
             this.ServiceRating = model.ServiceRating;
             this.FoodRating = model.FoodRating;
-            this.CostLevel = model.CostLevel;
             this.PhoneNumber = model.PhoneNumber;
+
             this.CostPerPerson = model.CostLowerLimit.ToString() + " - " + model.CostUpperLimit.ToString() + " taka"; ;
             this.CostUpperLimit = model.CostUpperLimit;
+            this.CostLowerLimit = model.CostLowerLimit;
 
             this.CreditCards = model.CreditCards;
             this.GoodFor = model.GoodFor;
+            this.Cuisines = model.Cuisines;
+            this.EstablishmentType = model.EstablishmentType;
+
             this.Parking = model.Parking;
             this.Attire = model.Attire;
+            this.NoiseLevel = model.NoiseLevel;
 
             this.Rooftop = model.Rooftop;
             this.Reservation = model.Reservation;
             this.Delivery = model.Delivery;
+            this.TakeOut = model.TakeOut;
             this.OutDoor = model.OutDoor;
             this.Wifi = model.Wifi;
             this.Tv = model.Tv;
             this.CandleLight = model.CandleLight;
-            this.LuxuryDining = model.LuxuryDining;                      
-            this.Cuisines = model.Cuisines;
+            this.LuxuryDining = model.LuxuryDining;
+            this.Washroom = model.Washroom;
+            this.Toilet = model.Toilet;
         }
     }
 }

@@ -7,7 +7,7 @@ using koi_jabo.Entity;
 using MongoDB.Driver;
 using System.Configuration;
 
-namespace koi_jabo.Lib.DBConnection
+namespace koi_jabo.Lib.MongoContext
 {
     class KoiJaboMongoDataContext : IMongoContext
     {

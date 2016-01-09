@@ -163,16 +163,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Lib\DBConnection\IMongoContext.cs" />
-    <Compile Include="Lib\DBConnection\KoiJaboMongoDataContext.cs" />
-    <Compile Include="Lib\DBConnection\MongoCollectionName.cs" />
+    <Compile Include="Lib\MongoContext\IMongoContext.cs" />
+    <Compile Include="Lib\MongoContext\KoiJaboMongoDataContext.cs" />
+    <Compile Include="Lib\MongoContext\MongoCollectionName.cs" />
     <Compile Include="Lib\Helper\CalculateDistance.cs" />
     <Compile Include="Lib\Helper\OpenOrCloseDetector.cs" />
     <Compile Include="Lib\Helper\SearchRestaurants.cs" />
+    <Compile Include="Lib\Repository\Restaurant\RestaurantManager.cs" />
+    <Compile Include="Lib\Repository\Restaurant\RestaurantRepository.cs" />
+    <Compile Include="Lib\Repository\Restaurant\RestaurantStore.cs" />
     <Compile Include="Models\ConstanLists.cs" />
     <Compile Include="Models\GeoJson\IGeoJsonEntity.cs" />
     <Compile Include="Models\GeoJson\Point.cs" />
     <Compile Include="Models\OpenCloseTime\OpenCloseTimeModel.cs" />
+    <Compile Include="Models\RestaurantFormValue.cs" />
     <Compile Include="Models\RestaurantModel.cs" />
     <Compile Include="Entity\RestaurantSummaryEntity.cs" />
     <Compile Include="Models\ReviewModel.cs" />
@@ -184,7 +188,7 @@
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Views\Home\index.cshtml" />
-    <Content Include="Views\Home\Restaurant.cshtml" />
+    <Content Include="Views\View.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
