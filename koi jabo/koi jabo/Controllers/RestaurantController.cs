@@ -118,7 +118,7 @@ namespace koi_jabo.Controllers
             }
             try
             {
-                var updatedRestaurant = _repository.UpdateFormValue(value);
+                var updatedRestaurant = await _repository.UpdateFormValue(value);
                 return Json(updatedRestaurant);
             }
             catch (Exception ex)
