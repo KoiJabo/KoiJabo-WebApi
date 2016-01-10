@@ -52,6 +52,7 @@ namespace koi_jabo.Models
                     entity.Name = item.value;
                 if (item.name == "Area") entity.Area = item.value;
                 if (item.name == "Address") entity.Address = item.value;
+                if (item.name == "TitleImageUrl") entity.TitleImageUrl = item.value;
                 if (item.name == "Latitude")
                     latitude= Convert.ToDouble(item.value);
                 if (item.name == "Longitude")

@@ -31,6 +31,7 @@ namespace koi_jabo.Entity
             this.Name = model.Name;
             this.Address = model.Address;
             this.Area = model.Area;
+            this.TitleImageUrl = model.TitleImageUrl;
             this.TimeTable = model.TimeTable;
             this.GeoPoint = model.GeoPoint;
             this.GeneralRatingRating = model.GeneralRatingRating;

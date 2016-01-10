@@ -23,6 +23,7 @@ namespace koi_jabo.Models
 
         [Required(ErrorMessage = "Restaurant GeoCoordinate must be provided")]
         public Point GeoPoint { get; set; }
+        public string TitleImageUrl { get; set; }
 
         public List<OpenCloseTimeModel> TimeTable { get; set; }
 

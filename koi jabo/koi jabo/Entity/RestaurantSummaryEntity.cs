@@ -21,6 +21,7 @@ namespace koi_jabo.Entity
         public double Distance { get; set; }
         public string Name { get; set; }
         public string Area { get; set; }
+        public string TitleImageUrl { get; set; }
         public List<string> Cuisines { get; set; }
         public double GeneralRatingRating { get; set; }
         public double AmbienceRating { get; set; }
@@ -38,6 +39,7 @@ namespace koi_jabo.Entity
             this._id = entity._id;
             this.Name = entity.Name;
             this.Area = entity.Area;
+            this.TitleImageUrl = entity.TitleImageUrl;
             this.IsOpenNow = entity.IsOpenNow;
             this.Cuisines = entity.Cuisines;
             this.GeneralRatingRating = entity.GeneralRatingRating;
