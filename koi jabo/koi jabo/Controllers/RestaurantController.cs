@@ -109,6 +109,24 @@ namespace koi_jabo.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IHttpActionResult> FormDataUpdate(List<RestaurantFormValue> value)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var updatedRestaurant = _repository.UpdateFormValue(value);
+                return Json(updatedRestaurant);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpDelete]
         public async Task<IHttpActionResult> Delete(string id)
         {

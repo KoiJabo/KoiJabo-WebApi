@@ -46,10 +46,16 @@ namespace koi_jabo.Lib.Repository.Restaurant
         public async Task<RestaurantEntity> FormDataInput(List<RestaurantFormValue> value)
         {
             var form = new RestaurantFormValue();
-            var model = form.ParseFormValueToModel(value);
-            var entity = new RestaurantEntity(model);
+            var entity = form.ParseFormValueToModel(value);            
             return await _manager.Create(entity);
            
+        }
+
+        internal async Task<ReplaceOneResult> UpdateFormValue(List<RestaurantFormValue> value)
+        {
+            var form = new RestaurantFormValue();
+            var entity = form.ParseFormValueToModel(value);
+            return await _manager.Update(entity);
         }
     }
 }
