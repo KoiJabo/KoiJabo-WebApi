@@ -74,6 +74,25 @@ namespace koi_jabo.Models
             return creditCardList;
         }
 
+        public static List<string> GetAreas()
+        {
+            var areaList = new List<string>();
+            areaList.Add("Banani");
+            areaList.Add("Gulshan");
+            areaList.Add("Gulshan");
+            areaList.Add("Bashundhara");
+            areaList.Add("Dhanmondi");
+            areaList.Add("Uttara");
+            areaList.Add("Baily");
+            areaList.Add("Khilgaon");
+            areaList.Add("Bashundhara");
+            areaList.Add("Mirpur");
+            areaList.Add("Mohammadpur");
+            areaList.Add("Mothijheel");
+
+            return areaList;
+        }
+
         public static List<string> GetGoodForList()
         {
             var goodForList = new List<string>();
@@ -118,7 +137,9 @@ namespace koi_jabo.Models
         public List<string> GoodFors { get; set; }
         public List<string> Attires { get; set; }
         public List<string> EstablishmentType { get; set; }
-        
+        public List<string> Area { get; set; }
+
+
         public OptionsForDashBoard()
         {
             Cuisines = ListOptions.GetCusines();
@@ -126,6 +147,7 @@ namespace koi_jabo.Models
             GoodFors = ListOptions.GetGoodForList();
             Attires = ListOptions.GetAttires();
             EstablishmentType = ListOptions.GetEstablishmentTypes();
+            Area = ListOptions.GetAreas();
         }
     }
 }
