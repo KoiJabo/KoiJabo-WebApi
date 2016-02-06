@@ -8,7 +8,7 @@ namespace koi_jabo.Lib.MongoContext
 {
     public class MongoCollectionNames
     {
-        public static readonly string RestaurantsCollectionName = "Restaurants";
+        public static readonly string RestaurantsCollectionName = "NewRestaurants";
         public static readonly string ReviewsCollectionName = "Reviews";
         public static readonly string UsersCollectionName = "Users";
 

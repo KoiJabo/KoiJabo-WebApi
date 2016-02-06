@@ -94,34 +94,7 @@ namespace koi_jabo.Models
                 if (item.name == "FridayStopTime")
                     entity.TimeTable[6].EndTime = Convert.ToInt32(item.value);
 
-                
-
-                if (item.name == "PhoneNumber") entity.PhoneNumber = item.value;
-                if (item.name == "CostUpperLimit") entity.CostUpperLimit = Convert.ToInt32(item.value);
-                if (item.name == "CostLowerLimit") entity.CostLowerLimit = Convert.ToInt32(item.value);
-
-                if (item.name == "CreditCards") entity.CreditCards.Add(item.value);
-                if (item.name == "GoodFor") entity.GoodFor.Add(item.value);
-                if (item.name == "Cuisines") entity.Cuisines.Add(item.value);
-                if (item.name == "EstablishmentType") entity.EstablishmentType.Add(item.value);
-                
-
-                if (item.name == "Parking") entity.Parking = item.value;
-                if (item.name == "Attire") entity.Attire = item.value;
-                if (item.name == "NoiseLevel") entity.NoiseLevel = item.value;
-
-                if (item.name == "Rooftop") entity.Rooftop = StringToBoolean(item.value);
-                if (item.name == "Reservation") entity.Reservation = StringToBoolean(item.value);
-                if (item.name == "Delivery") entity.Delivery = StringToBoolean(item.value);
-                if (item.name == "TakeOut") entity.TakeOut = StringToBoolean(item.value);
-                if (item.name == "OutDoor") entity.OutDoor = StringToBoolean(item.value);
-                if (item.name == "Wifi") entity.Wifi = StringToBoolean(item.value);
-                if (item.name == "Tv") entity.Tv = StringToBoolean(item.value);
-                if (item.name == "CandleLight") entity.CandleLight = StringToBoolean(item.value);
-                if (item.name == "LuxuryDining") entity.LuxuryDining = StringToBoolean(item.value);
-                if (item.name == "Washroom") entity.Washroom = StringToBoolean(item.value);
-                if (item.name == "Toilet") entity.Toilet = StringToBoolean(item.value);
-                
+              
 
             }
 

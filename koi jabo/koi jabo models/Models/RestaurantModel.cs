@@ -24,7 +24,10 @@ namespace koi_jabo.Models
         [Required(ErrorMessage = "Restaurant GeoCoordinate must be provided")]
         public Point GeoPoint { get; set; }
         public string TitleImageUrl { get; set; }
+        public string Parking { get; set; }
 
+        public string Attire { get; set; }
+        public string NoiseLevel { get; set; }
         public List<OpenCloseTimeModel> TimeTable { get; set; }
 
         public double GeneralRatingRating { get; set; }
@@ -49,25 +52,12 @@ namespace koi_jabo.Models
         public List<string> EstablishmentType { get; set; }
 
 
-        public string Parking { get; set; }
+     
 
-        public string Attire { get; set; }
-        public string NoiseLevel { get; set; }
+        public List<string> TagsTrue { get; set; }
+        public List<string> TagsFalse { get; set; }
 
-        public bool Rooftop { get; set; }
-        public bool Reservation { get; set; }
-        public bool Delivery { get; set; }
-        public bool TakeOut { get; set; }
-        public bool OutDoor { get; set; }
-        public bool Wifi { get; set; }
-        public bool Tv { get; set; }
-        public bool CandleLight { get; set; }
-        public bool LuxuryDining { get; set; }
 
-        public bool Washroom { get; set; }
-        public bool Toilet { get; set; }
-        
-        
 
 
     }
