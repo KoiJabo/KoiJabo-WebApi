@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using Newtonsoft.Json;
+ 
 using System.Threading.Tasks;
 using System.Web.Http;
 using MongoDB.Bson.Serialization;
@@ -15,7 +15,7 @@ using koi_jabo.Lib.Helper;
 using koi_jabo.Lib.Repository.Restaurant;
 using System.Web.Http.Cors;
 using koi_jabo.Lib.MongoContext;
-using Newtonsoft.Json.Linq;
+ 
 
 namespace koi_jabo.Controllers
 {
@@ -79,9 +79,9 @@ namespace koi_jabo.Controllers
         }
         [HttpGet]
         public async Task<IHttpActionResult> Get(string id=null)
-        {            
+        {
             try
-            {                
+            {
                 var one = await _repository.Get(id);
                 return Json(one);
             }
