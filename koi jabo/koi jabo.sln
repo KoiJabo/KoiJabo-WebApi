@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "koi jabo.Tests", "koi jabo.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "koi jabo models", "koi jabo models\koi jabo models.csproj", "{1869928A-ACE1-4C7F-A36E-2D60B9AB9F7F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "koi jabo model changer", "koi jabo model changer\koi jabo model changer.csproj", "{395553E8-D502-465B-8449-265045D31A70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1869928A-ACE1-4C7F-A36E-2D60B9AB9F7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1869928A-ACE1-4C7F-A36E-2D60B9AB9F7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1869928A-ACE1-4C7F-A36E-2D60B9AB9F7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{395553E8-D502-465B-8449-265045D31A70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{395553E8-D502-465B-8449-265045D31A70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{395553E8-D502-465B-8449-265045D31A70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{395553E8-D502-465B-8449-265045D31A70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
