@@ -37,6 +37,22 @@ namespace koi_jabo.Lib.MongoContext
             CreateIndexOptions GeoSphereindexOptions = new CreateIndexOptions();
             GeoSphereindexOptions.SphereIndexVersion = 2;
             _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Geo2DSphere(x => x.GeoPoint), GeoSphereindexOptions);
+
+            CreateIndexOptions TextindexOptions = new CreateIndexOptions();
+
+            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Text(x => x.Name), TextindexOptions);
+            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Text(x => x.Area), TextindexOptions);
+            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Text(x => x.Address), TextindexOptions);
+            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Text(x => x.PhoneNumber), TextindexOptions);
+            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Text(x => x.CreditCards), TextindexOptions);
+            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Text(x => x.GoodFor), TextindexOptions);
+            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Text(x => x.Cuisines), TextindexOptions);
+            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Text(x => x.EstablishmentType), TextindexOptions);
+            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Text(x => x.Parking), TextindexOptions);
+            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Text(x => x.Attire), TextindexOptions);
+            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Text(x => x.NoiseLevel), TextindexOptions);
+            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Text(x => x.TagsTrue), TextindexOptions);
+            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Text(x => x.TagsFalse), TextindexOptions);
         }
     }
 }

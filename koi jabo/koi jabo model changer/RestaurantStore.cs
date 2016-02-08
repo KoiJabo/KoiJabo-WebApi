@@ -52,50 +52,7 @@ namespace koi_jabo_model_changer
                 newentity.Attire = model.Attire;
                 newentity.NoiseLevel = model.NoiseLevel;
 
-                if (model.Rooftop)
-                    newentity.TagsTrue.Add("Rooftop");
-                else if (!model.Rooftop)
-                    newentity.TagsFalse.Add("Rooftop");
-                if (model.Reservation)
-                    newentity.TagsTrue.Add("Reservation");
-                else if (!model.Reservation)
-                    newentity.TagsFalse.Add("Reservation");
-                if (model.Delivery)
-                    newentity.TagsTrue.Add("Delivery");
-                else if (!model.Delivery)
-                    newentity.TagsFalse.Add("Delivery");
-                if (model.TakeOut)
-                    newentity.TagsTrue.Add("TakeOut");
-                else if (!model.TakeOut)
-                    newentity.TagsFalse.Add("TakeOut");
-                if (model.OutDoor)
-                    newentity.TagsTrue.Add("OutDoor");
-                else if (!model.OutDoor)
-                    newentity.TagsFalse.Add("OutDoor");
-                if (model.Wifi)
-                    newentity.TagsTrue.Add("Wifi");
-                else if (!model.Wifi)
-                    newentity.TagsFalse.Add("Wifi");
-                if (model.Tv)
-                    newentity.TagsTrue.Add("Tv");
-                else if (!model.Tv)
-                    newentity.TagsFalse.Add("Tv");
-                if (model.CandleLight)
-                    newentity.TagsTrue.Add("CandleLight");
-                else if (!model.CandleLight)
-                    newentity.TagsFalse.Add("CandleLight");
-                if (model.LuxuryDining)
-                    newentity.TagsTrue.Add("LuxuryDining");
-                else if (!model.LuxuryDining)
-                    newentity.TagsFalse.Add("LuxuryDining");
-                if (model.Washroom)
-                    newentity.TagsTrue.Add("Washroom");
-                else if (!model.Washroom)
-                    newentity.TagsFalse.Add("Washroom");
-                if (model.Toilet)
-                    newentity.TagsTrue.Add("Toilet");
-                else if (!model.Toilet)
-                    newentity.TagsFalse.Add("Toilet");
+                 
 
                 newEntity.Add(newentity);
 

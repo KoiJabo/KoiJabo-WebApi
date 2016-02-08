@@ -40,7 +40,7 @@ namespace koi_jabo.Entity
             this.FoodRating = model.FoodRating;
             this.PhoneNumber = model.PhoneNumber;
 
-            this.CostPerPerson = model.CostLowerLimit.ToString() + " - " + model.CostUpperLimit.ToString() + " taka"; ;
+            this.CostPerPerson = model.CostLowerLimit.ToString() + " - " + model.CostUpperLimit.ToString() + " taka";
             this.CostUpperLimit = model.CostUpperLimit;
             this.CostLowerLimit = model.CostLowerLimit;
 
@@ -53,17 +53,8 @@ namespace koi_jabo.Entity
             this.Attire = model.Attire;
             this.NoiseLevel = model.NoiseLevel;
 
-            this.Rooftop = model.Rooftop;
-            this.Reservation = model.Reservation;
-            this.Delivery = model.Delivery;
-            this.TakeOut = model.TakeOut;
-            this.OutDoor = model.OutDoor;
-            this.Wifi = model.Wifi;
-            this.Tv = model.Tv;
-            this.CandleLight = model.CandleLight;
-            this.LuxuryDining = model.LuxuryDining;
-            this.Washroom = model.Washroom;
-            this.Toilet = model.Toilet;
+            this.TagsFalse = model.TagsFalse;
+            this.TagsTrue = model.TagsTrue;
         }
     }
 }

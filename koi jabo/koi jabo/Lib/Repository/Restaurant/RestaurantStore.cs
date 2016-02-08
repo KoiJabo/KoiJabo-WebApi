@@ -25,7 +25,7 @@ namespace koi_jabo.Lib.Repository.Restaurant
 
         internal async Task<List<RestaurantSummaryEntity>> Search(FilterDefinition<RestaurantEntity> searchFilter, bool isOpenNow)
         {
-            var Collection = context.Database.GetCollection<RestaurantEntity>("Restaurants");
+            var Collection = context.Database.GetCollection<RestaurantEntity>(MongoCollectionNames.RestaurantsCollectionName);
             var searchResult = await Collection.Find(searchFilter).ToListAsync();
             var list = new List<RestaurantSummaryEntity>();
             foreach (var item in searchResult)
