@@ -43,7 +43,10 @@ namespace koi_jabo.Lib.Helper
                  
                 if(param.Key == "Value")
                 {
-                    searchFilter &= filter.Text(param.Value);
+                    if (param.Value!="")
+                    {
+                        searchFilter &= filter.Text(param.Value);
+                    }
                 }
                 
                 else if (param.Key == "CostUpperLimit")
