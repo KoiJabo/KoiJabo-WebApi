@@ -39,33 +39,29 @@ namespace koi_jabo.Lib.Helper
            
 
             foreach (var param in QueryParameters)
-            {
-                 
-                if(param.Key == "value")
+            {                                
+                if(param.Key == "value" && CheckValue(typeof(string), param.Value))
                 {
-                    if (param.Value!="")
-                    {
                         searchFilter &= filter.Text(param.Value);                        
-                    }
                 }
                 
-                else if (param.Key == "costupperlimit")
+                else if (param.Key == "costupperlimit" && CheckValue(typeof(int), param.Value))
                 {
                     searchFilter &= filter.Where(x => x.CostUpperLimit <= Convert.ToInt32(param.Value));
                 }
-                else if (param.Key == "costlowerlimit")
+                else if (param.Key == "costlowerlimit" && CheckValue(typeof(int), param.Value))
                 {
                     searchFilter &= filter.Where(x => x.CostLowerLimit >= Convert.ToInt32(param.Value));
                 }
-                else if (param.Key == "lat")
+                else if (param.Key == "lat" && CheckValue(typeof(double), param.Value))
                 {
                     latitude = Convert.ToDouble(param.Value);
                 }
-                else if (param.Key == "lon")
+                else if (param.Key == "lon" && CheckValue(typeof(double), param.Value))
                 {
                     longitude = Convert.ToDouble(param.Value);
                 }
-                else if (param.Key == "distance")
+                else if (param.Key == "distance" && CheckValue(typeof(int), param.Value))
                 {
                     distanceInMeter = Convert.ToInt32(param.Value);
                 }
@@ -80,6 +76,13 @@ namespace koi_jabo.Lib.Helper
             
             
             return searchFilter;
+        }
+
+        private static bool CheckValue(Type type, object determineType)
+        {
+            if (determineType.GetType().Equals(type) && !determineType.Equals(null) && !determineType.Equals(""))
+                return true;
+            return false;
         }
     }
 }
