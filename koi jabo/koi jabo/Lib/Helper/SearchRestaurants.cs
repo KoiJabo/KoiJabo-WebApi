@@ -80,7 +80,7 @@ namespace koi_jabo.Lib.Helper
 
         private static bool CheckValue(Type type, object determineType)
         {
-            if (determineType.GetType().Equals(type) && !determineType.Equals(null) || !determineType.Equals(""))
+            if (determineType.GetType().Equals(type) && !determineType.Equals(null) && !determineType.Equals(""))
                 return true;
             return false;
         }
