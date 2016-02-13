@@ -19,15 +19,39 @@ namespace koi_jabo_models.Models.Pagination
         internal string GeneratePageUrl(string route, long page, long pageSize, Dictionary<string, object> otherParams = null)
         {
             Dictionary<string, object> routeParams = new Dictionary<string, object>();
-            routeParams.Add("page", page);
-            routeParams.Add("pageSize", pageSize);
-            routeParams.Add("envelope", true);
+            routeParams.Add("page", page.ToString());
+            routeParams.Add("pageSize", pageSize.ToString());
 
-            if (otherParams != null)
+            foreach (var param in otherParams)
             {
-                foreach (var item in otherParams)
+
+                if (param.Key == "value")
                 {
-                    routeParams.Add(item.Key, item.Value);
+                    if (param.Value != "")
+                    {
+                        routeParams.Add("value", param.Value);
+                    }
+                }
+
+                else if (param.Key == "costupperlimit")
+                {
+                    routeParams.Add("costupperlimit", param.Value);
+                }
+                else if (param.Key == "costlowerlimit")
+                {
+                    routeParams.Add("costlowerlimit", param.Value);
+                }
+                else if (param.Key == "lat")
+                {
+                    routeParams.Add("lat", param.Value);
+                }
+                else if (param.Key == "lon")
+                {
+                    routeParams.Add("lon", param.Value);
+                }
+                else if (param.Key == "distance")
+                {
+                    routeParams.Add("distance", param.Value);
                 }
             }
 

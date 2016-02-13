@@ -25,22 +25,23 @@ namespace koi_jabo.Lib.Repository.Restaurant
             RestaurantEntity entity = new RestaurantEntity(model);
             return await _store.Create(entity);
         }
-
-        public async Task<IEnumerable<RestaurantSummaryEntity>> Search(HttpRequestMessage request, int page, int pageSize)
+        private FilterDefinition<RestaurantEntity> GetSearchFilter(HttpRequestMessage request)
         {
             var queryStringParameter = request.GetQueryNameValuePairs().ToDictionary(x => x.Key, y => y.Value);
             var searchFilter = SearchRestaurants.GetSearchFilter(queryStringParameter);
-
-            KeyValuePair<string, string> pair = new KeyValuePair<string, string>("isopen", "true");
-            bool isOpenNow = queryStringParameter.Contains(pair);
-
-            
-            return await _store.Search(searchFilter, isOpenNow, page*pageSize, pageSize);
+            return searchFilter;
+        }
+        public async Task<IEnumerable<RestaurantSummaryEntity>> Search(HttpRequestMessage request, int page, int pageSize)
+        {
+            var searchFilter = GetSearchFilter(request);
+            KeyValuePair<string, string> pair = new KeyValuePair<string, string>("isopen", "true");                   
+            return await _store.Search(searchFilter, page*pageSize, pageSize);
         }
 
-        public async Task<long> CountToTal()
+        public async Task<long> CountToTal(HttpRequestMessage request)
         {
-            return await _store.CountTotal();
+            var searchFilter = GetSearchFilter(request);
+            return await _store.CountTotal(searchFilter);
         }
 
         public Task<DeleteResult> Delete(string id)

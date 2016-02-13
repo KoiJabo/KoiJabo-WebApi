@@ -27,9 +27,10 @@ namespace koi_jabo.Lib.Repository.Restaurant
         public async Task<PageEnvelope<RestaurantSummaryEntity>> Search(HttpRequestMessage request, int page, int pageSize)
         {
             var searchResult = await _manager.Search(request, page, pageSize);
-            var total = await _manager.CountToTal();
+            var total = await _manager.CountToTal(request);
+            var queryStringParameter = request.GetQueryNameValuePairs().ToDictionary(x => x.Key, y =>(object) y.Value);
             string Type = "Type";
-            return new PageEnvelope<RestaurantSummaryEntity>(total, page, pageSize, "DefaultApi", searchResult, request);
+            return new PageEnvelope<RestaurantSummaryEntity>(total, page, pageSize, "DefaultApi", searchResult, request, queryStringParameter);
         }
 
         public Task<RestaurantEntity> Get(string id)
