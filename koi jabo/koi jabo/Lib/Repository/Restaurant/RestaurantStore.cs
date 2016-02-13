@@ -9,6 +9,7 @@ using koi_jabo.Models;
 using MongoDB.Driver;
 using System.Web.Http;
 using koi_jabo.Lib.Helper;
+using koi_jabo.Models.GeoJson;
 
 namespace koi_jabo.Lib.Repository.Restaurant
 {
@@ -30,7 +31,7 @@ namespace koi_jabo.Lib.Repository.Restaurant
         }
 
         internal async Task<IEnumerable<RestaurantSummaryEntity>> Search(FilterDefinition<RestaurantEntity> searchFilter,
-            int start, int limit)
+            int start, int limit, Point usersLocation)
         {
             var Collection = context.Database.GetCollection<RestaurantEntity>(MongoCollectionNames.RestaurantsCollectionName);
             var searchResult = await Collection.Find(searchFilter).Skip(start).Limit(limit).ToListAsync();
@@ -38,6 +39,7 @@ namespace koi_jabo.Lib.Repository.Restaurant
             foreach (var item in searchResult)
             {
                 item.IsOpenNow = OpenOrCloseDetector.Detect(item);
+                item.Distance = CalculateDistance.distance(usersLocation, item.GeoPoint);
                 var result = new RestaurantSummaryEntity(item);
                 list.Add(result);
             }

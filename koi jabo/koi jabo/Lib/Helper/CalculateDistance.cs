@@ -1,4 +1,5 @@
-﻿using System;
+﻿using koi_jabo.Models.GeoJson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,22 @@ namespace koi_jabo.Lib.Helper
 {
     public static class CalculateDistance
     {
+        public static double distance(Point usersLocation, Point objectLocation)
+        {
+            if (usersLocation.coordinates == null || usersLocation.coordinates[0] == 0 || usersLocation.coordinates[1] == 0
+                || objectLocation.coordinates[0] == 0 || objectLocation.coordinates[1] == 0)
+            {
+                return 0;
+            }
+            var lon1 = usersLocation.coordinates[0];
+            var lat1 = usersLocation.coordinates[1];
+
+            var lon2 = objectLocation.coordinates[0];
+            var lat2 = objectLocation.coordinates[1];
+
+            return distance(lat1, lon1, lat2, lon2, 'K');
+
+        }
         public static double distance(double lat1, double lon1, double lat2, double lon2, char unit)
         {
             double theta = lon1 - lon2;

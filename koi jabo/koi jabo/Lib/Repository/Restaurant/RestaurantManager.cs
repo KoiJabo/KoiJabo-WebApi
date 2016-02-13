@@ -10,6 +10,7 @@ using koi_jabo.Lib.MongoContext;
 using koi_jabo.Models;
 using koi_jabo.Lib.Helper;
 using MongoDB.Driver;
+using koi_jabo.Models.GeoJson;
 
 namespace koi_jabo.Lib.Repository.Restaurant
 {
@@ -31,11 +32,46 @@ namespace koi_jabo.Lib.Repository.Restaurant
             var searchFilter = SearchRestaurants.GetSearchFilter(queryStringParameter);
             return searchFilter;
         }
+        private Point GetUsersLocation(HttpRequestMessage request)
+        {
+            bool isLocationOn = false;
+            double lat = 0;
+            double lon = 0;
+            bool latOn = false;
+            bool lonOn = false;
+            Point point = new Point();
+            var queryStringParameter = request.GetQueryNameValuePairs().ToDictionary(x => x.Key, y => y.Value);
+            foreach (var item in queryStringParameter)
+            {
+                if (item.Key.Contains("lat"))
+                {
+                    latOn = true;
+                    lat = Convert.ToDouble(item.Value);
+                }
+                if (item.Key.Contains("lon"))
+                {
+                    lonOn = true;
+                    lon = Convert.ToDouble(item.Value);
+                }
+                if (latOn && lonOn)
+                {
+                    isLocationOn = true;
+                    break;
+                }
+            }
+            if (isLocationOn)
+            {
+                point = new Point(lon, lat);
+            }
+            return point;
+        }
         public async Task<IEnumerable<RestaurantSummaryEntity>> Search(HttpRequestMessage request, int page, int pageSize)
         {
             var searchFilter = GetSearchFilter(request);
-            KeyValuePair<string, string> pair = new KeyValuePair<string, string>("isopen", "true");                   
-            return await _store.Search(searchFilter, page*pageSize, pageSize);
+            var usersLocation = GetUsersLocation(request);
+            var searchResult = await _store.Search(searchFilter, page*pageSize, pageSize, usersLocation);
+
+            return searchResult;
         }
 
         public async Task<long> CountToTal(HttpRequestMessage request)
