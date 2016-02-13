@@ -191,6 +191,9 @@
     <Compile Include="Lib\Repository\Restaurant\RestaurantManager.cs" />
     <Compile Include="Lib\Repository\Restaurant\RestaurantRepository.cs" />
     <Compile Include="Lib\Repository\Restaurant\RestaurantStore.cs" />
+    <Compile Include="Model\Pagination\PageEnvelop.cs" />
+    <Compile Include="Model\Pagination\PaginationHeader.cs" />
+    <Compile Include="Model\Pagination\PagingHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

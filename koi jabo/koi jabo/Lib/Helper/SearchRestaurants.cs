@@ -29,7 +29,7 @@ namespace koi_jabo.Lib.Helper
             var filter = Builders<RestaurantEntity>.Filter;
  
 
-            int maxDistanceinMeter = 0;
+            int distanceInMeter = 0;
             int minDistanceinMeter = 0;
 
             double latitude = 0;
@@ -41,37 +41,33 @@ namespace koi_jabo.Lib.Helper
             foreach (var param in QueryParameters)
             {
                  
-                if(param.Key == "Value")
+                if(param.Key == "value")
                 {
                     if (param.Value!="")
                     {
-                        searchFilter &= filter.Text(param.Value);
+                        searchFilter &= filter.Text(param.Value);                        
                     }
                 }
                 
-                else if (param.Key == "CostUpperLimit")
+                else if (param.Key == "costupperlimit")
                 {
                     searchFilter &= filter.Where(x => x.CostUpperLimit <= Convert.ToInt32(param.Value));
                 }
-                else if (param.Key == "CostLowerLimit")
+                else if (param.Key == "costlowerlimit")
                 {
                     searchFilter &= filter.Where(x => x.CostLowerLimit >= Convert.ToInt32(param.Value));
                 }
-                else if (param.Key == "Latitude")
+                else if (param.Key == "lat")
                 {
                     latitude = Convert.ToDouble(param.Value);
                 }
-                else if (param.Key == "Longitude")
+                else if (param.Key == "lon")
                 {
                     longitude = Convert.ToDouble(param.Value);
                 }
-                else if (param.Key == "MaxDistance")
+                else if (param.Key == "distance")
                 {
-                    maxDistanceinMeter = Convert.ToInt32(param.Value);
-                }
-                else if (param.Key == "MinDistance")
-                {
-                    minDistanceinMeter = Convert.ToInt32(param.Value);
+                    distanceInMeter = Convert.ToInt32(param.Value);
                 }
             }
 
@@ -79,11 +75,11 @@ namespace koi_jabo.Lib.Helper
             {
                 GeoJsonPoint<GeoJson2DGeographicCoordinates> Point = new GeoJsonPoint<GeoJson2DGeographicCoordinates>(new GeoJson2DGeographicCoordinates(longitude, latitude));
                 FilterDefinitionBuilder<RestaurantEntity> builder = new FilterDefinitionBuilder<RestaurantEntity>();
-                searchFilter &= builder.Near<GeoJson2DGeographicCoordinates>(x => x.GeoPoint, Point, maxDistanceinMeter);
+                searchFilter &= builder.Near<GeoJson2DGeographicCoordinates>(x => x.GeoPoint, Point, distanceInMeter);
             }
             
             
             return searchFilter;
-        }        
+        }
     }
 }
