@@ -10,8 +10,12 @@ namespace koi_jabo.Lib.Helper
     {
         public static bool Detect(RestaurantEntity entity)
         {
-            var today = DateTime.Now.DayOfWeek;
-            var hourNow = DateTime.Now.Hour;
+            TimeZone zone;
+            TimeZoneInfo info = TimeZoneInfo.FindSystemTimeZoneById("Central Asia Standard Time");
+            DateTime datetime = TimeZoneInfo.ConvertTime(DateTime.Now, info);
+
+            var today = datetime.DayOfWeek;
+            var hourNow = datetime.Hour;
 
             foreach (var item in entity.TimeTable)
             {
