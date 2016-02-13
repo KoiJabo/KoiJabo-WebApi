@@ -12,6 +12,7 @@ namespace koi_jabo.Models
         public int FoodRating { get; set; }
         public int ServiceRating { get; set; }
         public int AmbienceRating { get; set; }
+        public int CleanlinesRating { get; set; }
         public int OverAllRating { get; set; }
 
         public string TextReview { get; set; }

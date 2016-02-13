@@ -23,6 +23,7 @@ namespace koi_jabo.Entity
             this.FoodRating = model.FoodRating;
             this.ServiceRating = model.ServiceRating;
             this.AmbienceRating = model.AmbienceRating;
+            this.CleanlinesRating = model.CleanlinesRating;
             this.OverAllRating = model.OverAllRating;
             this.TextReview = model.TextReview;
             this.Tips = model.Tips;
