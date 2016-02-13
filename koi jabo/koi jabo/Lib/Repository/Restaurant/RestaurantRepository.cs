@@ -8,6 +8,7 @@ using koi_jabo.Entity;
 using System.Web.Http;
 using System.Net.Http;
 using MongoDB.Driver;
+using koi_jabo_models.Models.Pagination;
 
 namespace koi_jabo.Lib.Repository.Restaurant
 {
@@ -23,9 +24,12 @@ namespace koi_jabo.Lib.Repository.Restaurant
             return await _manager.Create(model);
         }
 
-        public async Task<List<RestaurantSummaryEntity>> Search(HttpRequestMessage request)
+        public async Task<PageEnvelope<RestaurantSummaryEntity>> Search(HttpRequestMessage request, int page, int pageSize)
         {
-            return await _manager.Search(request);
+            var searchResult = await _manager.Search(request, page, pageSize);
+            var total = await _manager.CountToTal();
+            string Type = "Type";
+            return new PageEnvelope<RestaurantSummaryEntity>(total, page, pageSize, "DefaultApi", searchResult, request);
         }
 
         public Task<RestaurantEntity> Get(string id)

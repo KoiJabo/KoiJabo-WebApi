@@ -56,15 +56,31 @@ namespace koi_jabo.Controllers
             {
                 return Json(false);
             }
-            
         }
-
+        /// <summary>
+        /// This is the search action
+        /// </summary>
+        /// <param name="page">page number</param>
+        /// <param name="pageSize">number of entrie per page</param>
+        /// <param name="value"></param>
+        /// <param name="isopen">you want currently open restaurants? true or false</param>
+        /// <param name ="costupperlimit">upper limit of costs, int number</param>
+        /// <param name="costlowerlimit">lower limit of costs, int number</param>
+        /// <param name ="lat">your latitude</param>
+        /// <param name="lon">your longitude</param>
+        /// <param name ="distance">distance in meter</param>
+        /// <returns>List of RestaurantSummary</returns>
         [HttpGet]
-        public async Task<IHttpActionResult> Search()
+        public async Task<IHttpActionResult> Search(int page=0, int pageSize = 100)
         {
             try
             {
-                var list = await _repository.Search(Request);               
+                if (pageSize == 0)
+                    return BadRequest("Page size cant be 0");
+                if (page < 0)
+                    return BadRequest("Page index less than 0 provided");
+
+                var list = await _repository.Search(Request, page, pageSize);
                 return Json(list);
             }
             catch (Exception ex) 

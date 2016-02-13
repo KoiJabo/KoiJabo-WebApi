@@ -22,11 +22,16 @@ namespace koi_jabo.Lib.Repository.Restaurant
             return entity;
 
         }
+        internal async Task<long> CountTotal()
+        {
+            return await context.Restaurants.CountAsync(x => true);
+        }
 
-        internal async Task<List<RestaurantSummaryEntity>> Search(FilterDefinition<RestaurantEntity> searchFilter, bool isOpenNow)
+        internal async Task<IEnumerable<RestaurantSummaryEntity>> Search(FilterDefinition<RestaurantEntity> searchFilter,
+            bool isOpenNow, int start, int limit)
         {
             var Collection = context.Database.GetCollection<RestaurantEntity>(MongoCollectionNames.RestaurantsCollectionName);
-            var searchResult = await Collection.Find(searchFilter).ToListAsync();
+            var searchResult = await Collection.Find(searchFilter).Skip(start).Limit(limit).ToListAsync();
             var list = new List<RestaurantSummaryEntity>();
             foreach (var item in searchResult)
             {
