@@ -40,8 +40,12 @@ namespace koi_jabo.Entity
             this.Name = entity.Name;
             this.Area = entity.Area;
             this.TitleImageUrl = entity.TitleImageUrl;
+
+            this.Distance = entity.Distance;
             this.IsOpenNow = entity.IsOpenNow;
+
             this.Cuisines = entity.Cuisines;
+
             this.GeneralRatingRating = entity.GeneralRatingRating;
             this.AmbienceRating = entity.AmbienceRating;
             this.ServiceRating = entity.ServiceRating;
