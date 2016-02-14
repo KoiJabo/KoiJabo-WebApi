@@ -19,6 +19,7 @@ namespace koi_jabo.Lib.Repository.Restaurant
 
         internal async Task<RestaurantEntity> Create(RestaurantEntity entity)
         {
+            entity.PopulateSearchTag(entity);
             await context.Restaurants.InsertOneAsync(entity);
             return entity;
 
@@ -62,8 +63,9 @@ namespace koi_jabo.Lib.Repository.Restaurant
         public async Task<ReplaceOneResult> Update(RestaurantEntity restaurant)
         {
             var filter = Builders<RestaurantEntity>.Filter.Where(x => x._id == restaurant._id);
+            restaurant.PopulateSearchTag(restaurant);
             var updatedRestaurant = await context.Restaurants.ReplaceOneAsync(filter, restaurant);
             return updatedRestaurant;
-        }
+        }         
     }
 }

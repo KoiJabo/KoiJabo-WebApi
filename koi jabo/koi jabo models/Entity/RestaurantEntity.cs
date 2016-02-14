@@ -55,6 +55,83 @@ namespace koi_jabo.Entity
 
             this.TagsFalse = model.TagsFalse;
             this.TagsTrue = model.TagsTrue;
+
+
+            this.PopulateSearchTag(model);        
+        }
+        public void PopulateSearchTag(RestaurantModel model)
+        {
+            this.SearchTags = new List<string>();
+
+            if (model.Name!=null)
+            {
+                this.SearchTags.Add(model.Name.ToLower());
+            }
+
+            if (model.Area!= null)
+            {
+                this.SearchTags.Add(model.Area.ToLower());
+            }
+
+            if (model.PhoneNumber!=null)
+            {
+                this.SearchTags.Add(model.PhoneNumber.ToLower());
+            }
+
+            if (model.Parking!=null)
+            {
+                this.SearchTags.Add(model.Parking.ToLower());
+            }
+
+            if (model.NoiseLevel!=null)
+            {
+                this.SearchTags.Add(model.NoiseLevel.ToLower());
+            }
+            if (model.Attire!= null)
+            {
+                this.SearchTags.Add(model.Attire.ToLower());
+            }
+            
+
+            foreach (var item in model.Cuisines)
+            {
+                if (item!=null)
+                {
+
+                }
+                this.SearchTags.Add(item.ToLower());
+            }
+            foreach (var item in model.GoodFor)
+            {
+                if (item != null)
+                {
+                    this.SearchTags.Add(item.ToLower());
+                }
+                
+            }
+            foreach (var item in model.EstablishmentType)
+            {
+                if (item != null)
+                {
+                    this.SearchTags.Add(item.ToLower());
+                }
+                
+            }
+            foreach (var item in model.TagsTrue)
+            {
+                if (item != null)
+                {
+                    this.SearchTags.Add(item.ToLower());
+                }
+                
+            }
+            foreach (var item in model.CreditCards)
+            {
+                if (item != null)
+                {
+                    this.SearchTags.Add(item.ToLower());
+                }
+            }
         }
     }
 }

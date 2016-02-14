@@ -56,7 +56,7 @@ namespace koi_jabo.Models
 
         public List<string> TagsTrue { get; set; }
         public List<string> TagsFalse { get; set; }
-
+        public List<string> SearchTags { get; set; }
 
 
 

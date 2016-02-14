@@ -16,8 +16,8 @@ namespace koi_jabo_model_changer
         public static readonly string UsersCollectionName = "Users";
         public IMongoDatabase Database { get; private set; }
 
-        private IMongoCollection<RestaurantEntity> _restaurants;
-        public IMongoCollection<RestaurantEntity> Restaurants { get { return _restaurants; } }
+        private IMongoCollection<NewEntity> _restaurants;
+        public IMongoCollection<NewEntity> Restaurants { get { return _restaurants; } }
 
         private IMongoCollection<ReviewEntity> _reviews;
         public IMongoCollection<ReviewEntity> Reviews { get { return _reviews; } }
@@ -37,7 +37,7 @@ namespace koi_jabo_model_changer
 
             Database = mongoClient.GetDatabase(mongoUrlBuilder.DatabaseName);
 
-            _restaurants = Database.GetCollection<RestaurantEntity>(RestaurantsCollectionName);
+            _restaurants = Database.GetCollection<NewEntity>(RestaurantsCollectionName);
             _reviews = Database.GetCollection<ReviewEntity>(ReviewsCollectionName);
             _users = Database.GetCollection<UserEntity>(UsersCollectionName);
 
@@ -45,7 +45,7 @@ namespace koi_jabo_model_changer
 
             CreateIndexOptions GeoSphereindexOptions = new CreateIndexOptions();
             GeoSphereindexOptions.SphereIndexVersion = 2;
-            _restaurants.Indexes.CreateOneAsync(Builders<RestaurantEntity>.IndexKeys.Geo2DSphere(x => x.GeoPoint), GeoSphereindexOptions);
+            _restaurants.Indexes.CreateOneAsync(Builders<NewEntity>.IndexKeys.Geo2DSphere(x => x.GeoPoint), GeoSphereindexOptions);
         }
     }
 }

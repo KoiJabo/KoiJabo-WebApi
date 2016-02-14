@@ -27,9 +27,9 @@ namespace koi_jabo.Lib.Helper
 
             searchFilter = Builders<RestaurantEntity>.Filter.Where(x => x.Name != null);
             var filter = Builders<RestaurantEntity>.Filter;
+            var searchTags = new List<string>();
 
-
-            int distanceInMeter = 0;
+            int distanceInMeter = 1000;
             int minDistanceinMeter = 0;
 
             double latitude = 0;
@@ -42,7 +42,9 @@ namespace koi_jabo.Lib.Helper
             {
                 if (param.Key == "value" && CheckValue(typeof(string), param.Value))
                 {
-                    searchFilter &= filter.Text(param.Value);
+                    var array = param.Value.ToLower().Split(' ');
+                    searchTags.AddRange(array);
+                    searchFilter &= filter.In("SearchTags", searchTags);
                 }
 
                 else if (param.Key == "costupperlimit" && CheckValue(typeof(int), Convert.ToInt32(param.Value)))
@@ -68,14 +70,14 @@ namespace koi_jabo.Lib.Helper
             }
 
             //FIXME : someday, i m gonna come to this segment and find out a way to query text and geonear together
-            //if (latitude != 0 && longitude != 0)
-            //{
-            //    GeoJsonPoint<GeoJson2DGeographicCoordinates> Point = new GeoJsonPoint<GeoJson2DGeographicCoordinates>(new GeoJson2DGeographicCoordinates(longitude, latitude));
-            //    FilterDefinitionBuilder<RestaurantEntity> builder = new FilterDefinitionBuilder<RestaurantEntity>();
-            //    searchFilter &= builder.Near<GeoJson2DGeographicCoordinates>(x => x.GeoPoint, Point, distanceInMeter);
-            //}
+            if (latitude != 0 && longitude != 0)
+            {
+                GeoJsonPoint<GeoJson2DGeographicCoordinates> Point = new GeoJsonPoint<GeoJson2DGeographicCoordinates>(new GeoJson2DGeographicCoordinates(longitude, latitude));
+                FilterDefinitionBuilder<RestaurantEntity> builder = new FilterDefinitionBuilder<RestaurantEntity>();
+                searchFilter &= builder.Near<GeoJson2DGeographicCoordinates>(x => x.GeoPoint, Point, distanceInMeter);
+            }
 
-             return searchFilter;
+            return searchFilter;
         }
 
         private static bool CheckValue(Type type, object determineType)
