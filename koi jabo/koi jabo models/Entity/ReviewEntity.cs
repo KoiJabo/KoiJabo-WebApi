@@ -28,7 +28,8 @@ namespace koi_jabo.Entity
             this.TextReview = model.TextReview;
             this.Tips = model.Tips;
             this.Verified = model.Verified;
-            this.UserId = model.UserId;
+            this.FbUserId = model.FbUserId;
+            this.FbUserName = model.FbUserName;
             this.RestaurantId = model.RestaurantId;
         }
     }

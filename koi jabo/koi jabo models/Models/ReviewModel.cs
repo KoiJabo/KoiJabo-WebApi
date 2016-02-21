@@ -20,7 +20,9 @@ namespace koi_jabo.Models
         public bool Verified { get; set; }
 
         [Required(ErrorMessage ="User _id must be provided")]
-        public string UserId { get; set; }
+        public string FbUserId { get; set; }
+
+        public string FbUserName { get; set; }
         [Required(ErrorMessage = "User _id must be provided")]
         public string RestaurantId { get; set; }
 
