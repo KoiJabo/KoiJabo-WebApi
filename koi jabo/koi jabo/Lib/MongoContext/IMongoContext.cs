@@ -1,10 +1,6 @@
 ﻿using koi_jabo.Entity;
+using koi_jabo_models.Entity;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace koi_jabo.Lib.MongoContext
 {
@@ -15,5 +11,6 @@ namespace koi_jabo.Lib.MongoContext
         IMongoCollection<RestaurantEntity> Restaurants { get; }
         IMongoCollection<ReviewEntity> Reviews { get; }
         IMongoCollection<UserEntity> Users { get; }
+        IMongoCollection<OptionsForDashBoardEntity> OptionsForDashBoard { get; }
     }
 }

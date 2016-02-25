@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\OptionsForDashBoardEntity.cs" />
     <Compile Include="Entity\RestaurantEntity.cs" />
     <Compile Include="Entity\RestaurantSummaryEntity.cs" />
     <Compile Include="Entity\ReviewEntity.cs" />

@@ -22,7 +22,7 @@ namespace koi_jabo.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class RestaurantController : ApiController
     {
-        KoiJaboMongoDataContext context = new KoiJaboMongoDataContext();
+        
         RestaurantRepository _repository;
         public RestaurantController()
         {

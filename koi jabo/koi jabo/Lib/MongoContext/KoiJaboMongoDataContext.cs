@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using koi_jabo.Entity;
 using MongoDB.Driver;
 using System.Configuration;
+using koi_jabo_models.Entity;
 
 namespace koi_jabo.Lib.MongoContext
 {
@@ -22,6 +23,9 @@ namespace koi_jabo.Lib.MongoContext
         private IMongoCollection<UserEntity> _users;
         public IMongoCollection<UserEntity> Users { get { return _users; } }
 
+        private IMongoCollection<OptionsForDashBoardEntity> _optionsForDashBoard;
+        public IMongoCollection<OptionsForDashBoardEntity> OptionsForDashBoard { get { return _optionsForDashBoard; } }
+
         public KoiJaboMongoDataContext()
         {
             var connectionString = ConfigurationManager.ConnectionStrings["KoijaboMongo.ConnectionString"].ConnectionString;
@@ -33,6 +37,7 @@ namespace koi_jabo.Lib.MongoContext
             _restaurants = Database.GetCollection<RestaurantEntity>(MongoCollectionNames.RestaurantsCollectionName);
             _reviews = Database.GetCollection<ReviewEntity>(MongoCollectionNames.ReviewsCollectionName);
             _users = Database.GetCollection<UserEntity>(MongoCollectionNames.UsersCollectionName);
+            _optionsForDashBoard = Database.GetCollection<OptionsForDashBoardEntity>(MongoCollectionNames.OptionsForDashboardCollectionName);
 
             CreateIndexOptions GeoSphereindexOptions = new CreateIndexOptions();
             GeoSphereindexOptions.SphereIndexVersion = 2;
