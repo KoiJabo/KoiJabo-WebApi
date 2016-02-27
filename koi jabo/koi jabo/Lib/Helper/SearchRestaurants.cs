@@ -41,10 +41,14 @@ namespace koi_jabo.Lib.Helper
             foreach (var param in QueryParameters)
             {
                 if (param.Key == "value" && CheckValue(typeof(string), param.Value))
-                {
-                    var array = param.Value.ToLower().Split(' ');
-                    searchTags.AddRange(array);
-                    searchFilter &= filter.In("SearchTags", searchTags);
+                {                    
+                    var array = param.Value.ToLower().Trim().Split(',');
+                    if (array.Length==1 && array[0]!=String.Empty)
+                    {
+                        searchTags.AddRange(array);
+                        searchFilter &= filter.In("SearchTags", searchTags);
+                    }
+                    
                 }
 
                 else if (param.Key == "costupperlimit" && CheckValue(typeof(int), Convert.ToInt32(param.Value)))
